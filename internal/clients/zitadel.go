@@ -9,11 +9,10 @@ import (
 	"encoding/json"
 
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
+	"github.com/crossplane/upjet/pkg/terraform"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
-
-	"github.com/crossplane/upjet/pkg/terraform"
 
 	"github.com/didactiklabs/provider-zitadel/apis/v1beta1"
 )
@@ -25,6 +24,14 @@ const (
 	errTrackUsage           = "cannot track ProviderConfig usage"
 	errExtractCredentials   = "cannot extract credentials"
 	errUnmarshalCredentials = "cannot unmarshal zitadel credentials as JSON"
+
+	// authentication
+	keyInsecure       = "insecure"
+	keyDomain         = "domain"
+	keyJwtProfileFile = "jwt_profile_file"
+	keyJwtProfileJson = "jwt_profile_json"
+	keyPort           = "port"
+	keyToken          = "token"
 )
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
@@ -53,7 +60,12 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			return ps, errors.Wrap(err, errTrackUsage)
 		}
 
-		data, err := resource.CommonCredentialExtractor(ctx, pc.Spec.Credentials.Source, client, pc.Spec.Credentials.CommonCredentialSelectors)
+		data, err := resource.CommonCredentialExtractor(
+			ctx,
+			pc.Spec.Credentials.Source,
+			client,
+			pc.Spec.Credentials.CommonCredentialSelectors,
+		)
 		if err != nil {
 			return ps, errors.Wrap(err, errExtractCredentials)
 		}
@@ -62,11 +74,26 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			return ps, errors.Wrap(err, errUnmarshalCredentials)
 		}
 
-		// Set credentials in Terraform provider configuration.
-		/*ps.Configuration = map[string]any{
-			"username": creds["username"],
-			"password": creds["password"],
-		}*/
+		ps.Configuration = map[string]any{}
+		if v, ok := creds[keyInsecure]; ok {
+			ps.Configuration[keyInsecure] = v
+		}
+		if v, ok := creds[keyDomain]; ok {
+			ps.Configuration[keyDomain] = v
+		}
+		if v, ok := creds[keyJwtProfileFile]; ok {
+			ps.Configuration[keyJwtProfileFile] = v
+		}
+		if v, ok := creds[keyJwtProfileJson]; ok {
+			ps.Configuration[keyJwtProfileJson] = v
+		}
+
+		if v, ok := creds[keyPort]; ok {
+			ps.Configuration[keyPort] = v
+		}
+		if v, ok := creds[keyToken]; ok {
+			ps.Configuration[keyToken] = v
+		}
 		return ps, nil
 	}
 }

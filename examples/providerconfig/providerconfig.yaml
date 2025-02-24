@@ -1,4 +1,4 @@
-apiVersion: zitadel.upbound.io/v1beta1
+apiVersion: zitadel.didactiklabs.io/v1beta1
 kind: ProviderConfig
 metadata:
   name: default
@@ -6,6 +6,6 @@ spec:
   credentials:
     source: Secret
     secretRef:
-      name: example-creds
+      name: zitadel-creds
       namespace: crossplane-system
       key: credentials

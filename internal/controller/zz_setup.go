@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	resource "github.com/didactiklabs/provider-zitadel/internal/controller/null/resource"
+	github "github.com/didactiklabs/provider-zitadel/internal/controller/idp/github"
 	providerconfig "github.com/didactiklabs/provider-zitadel/internal/controller/providerconfig"
 )
 
@@ -17,7 +17,7 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		resource.Setup,
+		github.Setup,
 		providerconfig.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {

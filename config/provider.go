@@ -5,12 +5,11 @@ Copyright 2021 Upbound Inc.
 package config
 
 import (
-	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
 
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 
-	"github.com/didactiklabs/provider-zitadel/config/null"
+	"github.com/didactiklabs/provider-zitadel/config/idp_github"
 )
 
 const (
@@ -35,8 +34,7 @@ func GetProvider() *ujconfig.Provider {
 		))
 
 	for _, configure := range []func(provider *ujconfig.Provider){
-		// add custom config functions
-		null.Configure,
+		idp_github.Configure,
 	} {
 		configure(pc)
 	}
