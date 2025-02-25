@@ -1,0 +1,31 @@
+apiVersion: application.zitadel.didactiklabs.io/v1alpha1
+kind: Oidc
+metadata:
+  annotations:
+    meta.upbound.io/example-id: application/v1alpha1/oidc
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    accessTokenRoleAssertion: false
+    accessTokenType: OIDC_TOKEN_TYPE_BEARER
+    additionalOrigins: []
+    appType: OIDC_APP_TYPE_WEB
+    authMethodType: OIDC_AUTH_METHOD_TYPE_BASIC
+    clockSkew: 0s
+    devMode: true
+    grantTypes:
+    - OIDC_GRANT_TYPE_AUTHORIZATION_CODE
+    idTokenRoleAssertion: false
+    idTokenUserinfoAssertion: false
+    orgId: ${data.zitadel_org.default.id}
+    postLogoutRedirectUris:
+    - https://localhost.com
+    projectId: ${data.zitadel_project.default.id}
+    redirectUris:
+    - https://localhost.com
+    responseTypes:
+    - OIDC_RESPONSE_TYPE_CODE
+    skipNativeAppSuccessPage: false
+    version: OIDC_VERSION_1_0

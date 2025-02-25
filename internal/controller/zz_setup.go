@@ -9,6 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
+	oidc "github.com/didactiklabs/provider-zitadel/internal/controller/application/oidc"
 	instancegithub "github.com/didactiklabs/provider-zitadel/internal/controller/idp/instancegithub"
 	orggithub "github.com/didactiklabs/provider-zitadel/internal/controller/idp/orggithub"
 	providerconfig "github.com/didactiklabs/provider-zitadel/internal/controller/providerconfig"
@@ -19,6 +20,7 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		oidc.Setup,
 		instancegithub.Setup,
 		orggithub.Setup,
 		providerconfig.Setup,

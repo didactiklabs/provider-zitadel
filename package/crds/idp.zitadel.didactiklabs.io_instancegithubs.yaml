@@ -4,9 +4,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: instancegithubs.idp.org.zitadel.didactiklabs.io
+  name: instancegithubs.idp.zitadel.didactiklabs.io
 spec:
-  group: idp.org.zitadel.didactiklabs.io
+  group: idp.zitadel.didactiklabs.io
   names:
     categories:
     - crossplane

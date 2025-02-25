@@ -9,6 +9,7 @@ import (
 
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 
+	"github.com/didactiklabs/provider-zitadel/config/application_oidc"
 	"github.com/didactiklabs/provider-zitadel/config/idp_github"
 	"github.com/didactiklabs/provider-zitadel/config/org"
 	"github.com/didactiklabs/provider-zitadel/config/org_idp_github"
@@ -39,6 +40,7 @@ func GetProvider() *ujconfig.Provider {
 		idp_github.Configure,
 		org_idp_github.Configure,
 		org.Configure,
+		application_oidc.Configure,
 	} {
 		configure(pc)
 	}
