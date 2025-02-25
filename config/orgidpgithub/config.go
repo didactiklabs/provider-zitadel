@@ -1,4 +1,4 @@
-package org_idp_github
+package orgidpgithub
 
 import "github.com/crossplane/upjet/pkg/config"
 
@@ -8,6 +8,6 @@ func Configure(p *config.Provider) {
 		// We need to override the default group that upjet generated for
 		// this resource, which would be "github"
 		r.Kind = "OrgGithub"
-		r.ShortGroup = "idp.org.zitadel"
+		r.ShortGroup = "idp.zitadel"
 	})
 }

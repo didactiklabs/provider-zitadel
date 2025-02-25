@@ -1,4 +1,4 @@
-apiVersion: idp.org.zitadel.didactiklabs.io/v1alpha1
+apiVersion: idp.zitadel.didactiklabs.io/v1alpha1
 kind: OrgGithub
 metadata:
   annotations:

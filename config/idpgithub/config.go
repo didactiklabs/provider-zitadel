@@ -1,4 +1,4 @@
-package idp_github
+package idpgithub
 
 import "github.com/crossplane/upjet/pkg/config"
 

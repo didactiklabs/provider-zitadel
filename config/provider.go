@@ -5,14 +5,14 @@ Copyright 2021 Upbound Inc.
 package config
 
 import (
-	_ "embed"
+	_ "embed" // go:embed
 
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 
-	"github.com/didactiklabs/provider-zitadel/config/application_oidc"
-	"github.com/didactiklabs/provider-zitadel/config/idp_github"
+	"github.com/didactiklabs/provider-zitadel/config/applicationoidc"
+	"github.com/didactiklabs/provider-zitadel/config/idpgithub"
 	"github.com/didactiklabs/provider-zitadel/config/org"
-	"github.com/didactiklabs/provider-zitadel/config/org_idp_github"
+	"github.com/didactiklabs/provider-zitadel/config/orgidpgithub"
 )
 
 const (
@@ -37,10 +37,10 @@ func GetProvider() *ujconfig.Provider {
 		))
 
 	for _, configure := range []func(provider *ujconfig.Provider){
-		idp_github.Configure,
-		org_idp_github.Configure,
+		idpgithub.Configure,
+		orgidpgithub.Configure,
 		org.Configure,
-		application_oidc.Configure,
+		applicationoidc.Configure,
 	} {
 		configure(pc)
 	}

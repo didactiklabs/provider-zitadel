@@ -29,7 +29,7 @@ const (
 	keyInsecure       = "insecure"
 	keyDomain         = "domain"
 	keyJwtProfileFile = "jwt_profile_file"
-	keyJwtProfileJson = "jwt_profile_json"
+	keyJwtProfileJSON = "jwt_profile_json"
 	keyPort           = "port"
 	keyToken          = "token"
 )
@@ -84,8 +84,8 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		if v, ok := creds[keyJwtProfileFile]; ok {
 			ps.Configuration[keyJwtProfileFile] = v
 		}
-		if v, ok := creds[keyJwtProfileJson]; ok {
-			ps.Configuration[keyJwtProfileJson] = v
+		if v, ok := creds[keyJwtProfileJSON]; ok {
+			ps.Configuration[keyJwtProfileJSON] = v
 		}
 
 		if v, ok := creds[keyPort]; ok {

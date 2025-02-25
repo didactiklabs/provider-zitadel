@@ -1,4 +1,4 @@
-package application_oidc
+package applicationoidc
 
 import "github.com/crossplane/upjet/pkg/config"
 
