@@ -36,6 +36,7 @@ const (
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
 // returns Terraform provider setup configuration
+// nolint: gocyclo
 func TerraformSetupBuilder(version, providerSource, providerVersion string) terraform.SetupFn {
 	return func(ctx context.Context, client client.Client, mg resource.Managed) (terraform.Setup, error) {
 		ps := terraform.Setup{
@@ -74,6 +75,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			return ps, errors.Wrap(err, errUnmarshalCredentials)
 		}
 
+		// nolint: gocyclo
 		ps.Configuration = map[string]any{}
 		if v, ok := creds[keyInsecure]; ok {
 			ps.Configuration[keyInsecure] = v
