@@ -19,6 +19,7 @@ spec:
     - OIDC_GRANT_TYPE_AUTHORIZATION_CODE
     idTokenRoleAssertion: false
     idTokenUserinfoAssertion: false
+    name: applicationoidc
     orgId: ${data.zitadel_org.default.id}
     postLogoutRedirectUris:
     - https://localhost.com

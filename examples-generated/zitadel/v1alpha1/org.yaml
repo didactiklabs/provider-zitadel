@@ -7,4 +7,5 @@ metadata:
     testing.upbound.io/example-name: default
   name: default
 spec:
-  forProvider: {}
+  forProvider:
+    name: terraform-test

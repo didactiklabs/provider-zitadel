@@ -127,6 +127,11 @@ spec:
                       (Boolean) Token userinfo assertion
                       Token userinfo assertion
                     type: boolean
+                  name:
+                    description: |-
+                      (String) Name of the application
+                      Name of the application
+                    type: string
                   orgId:
                     description: |-
                       (String) ID of the organization
@@ -236,6 +241,11 @@ spec:
                       (Boolean) Token userinfo assertion
                       Token userinfo assertion
                     type: boolean
+                  name:
+                    description: |-
+                      (String) Name of the application
+                      Name of the application
+                    type: string
                   orgId:
                     description: |-
                       (String) ID of the organization
@@ -450,6 +460,10 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.grantTypes)
                 || (has(self.initProvider) && has(self.initProvider.grantTypes))'
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
             - message: spec.forProvider.projectId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.projectId)
@@ -524,6 +538,11 @@ spec:
                       (Boolean) Token userinfo assertion
                       Token userinfo assertion
                     type: boolean
+                  name:
+                    description: |-
+                      (String) Name of the application
+                      Name of the application
+                    type: string
                   orgId:
                     description: |-
                       (String) ID of the organization

@@ -18,6 +18,7 @@ spec:
     isAutoUpdate: true
     isCreationAllowed: true
     isLinkingAllowed: false
+    name: GitHub
     scopes:
     - openid
     - profile

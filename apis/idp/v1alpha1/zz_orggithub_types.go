@@ -43,6 +43,10 @@ type OrgGithubInitParameters struct {
 	// enable if users should be able to link an existing ZITADEL user with an external account
 	IsLinkingAllowed *bool `json:"isLinkingAllowed,omitempty" tf:"is_linking_allowed,omitempty"`
 
+	// (String) Name of the IDP
+	// Name of the IDP
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// (String) ID of the organization
 	// ID of the organization
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
@@ -81,6 +85,10 @@ type OrgGithubObservation struct {
 	// (Boolean) enable if users should be able to link an existing ZITADEL user with an external account
 	// enable if users should be able to link an existing ZITADEL user with an external account
 	IsLinkingAllowed *bool `json:"isLinkingAllowed,omitempty" tf:"is_linking_allowed,omitempty"`
+
+	// (String) Name of the IDP
+	// Name of the IDP
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (String) ID of the organization
 	// ID of the organization
@@ -128,6 +136,11 @@ type OrgGithubParameters struct {
 	// enable if users should be able to link an existing ZITADEL user with an external account
 	// +kubebuilder:validation:Optional
 	IsLinkingAllowed *bool `json:"isLinkingAllowed,omitempty" tf:"is_linking_allowed,omitempty"`
+
+	// (String) Name of the IDP
+	// Name of the IDP
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (String) ID of the organization
 	// ID of the organization

@@ -122,6 +122,11 @@ spec:
                       (Boolean) enable if users should be able to link an existing ZITADEL user with an external account
                       enable if users should be able to link an existing ZITADEL user with an external account
                     type: boolean
+                  name:
+                    description: |-
+                      (String) Name of the IDP
+                      Name of the IDP
+                    type: string
                   orgId:
                     description: |-
                       (String) ID of the organization
@@ -198,6 +203,11 @@ spec:
                       (Boolean) enable if users should be able to link an existing ZITADEL user with an external account
                       enable if users should be able to link an existing ZITADEL user with an external account
                     type: boolean
+                  name:
+                    description: |-
+                      (String) Name of the IDP
+                      Name of the IDP
+                    type: string
                   orgId:
                     description: |-
                       (String) ID of the organization
@@ -443,6 +453,11 @@ spec:
                       (Boolean) enable if users should be able to link an existing ZITADEL user with an external account
                       enable if users should be able to link an existing ZITADEL user with an external account
                     type: boolean
+                  name:
+                    description: |-
+                      (String) Name of the IDP
+                      Name of the IDP
+                    type: string
                   orgId:
                     description: |-
                       (String) ID of the organization

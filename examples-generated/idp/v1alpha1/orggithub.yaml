@@ -18,6 +18,7 @@ spec:
     isAutoUpdate: true
     isCreationAllowed: true
     isLinkingAllowed: false
+    name: GitHub
     orgId: ${data.zitadel_org.default.id}
     scopes:
     - openid

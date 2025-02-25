@@ -43,6 +43,10 @@ type InstanceGithubInitParameters struct {
 	// enable if users should be able to link an existing ZITADEL user with an external account
 	IsLinkingAllowed *bool `json:"isLinkingAllowed,omitempty" tf:"is_linking_allowed,omitempty"`
 
+	// (String) Name of the IDP
+	// Name of the IDP
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// (Set of String) the scopes requested by ZITADEL during the request on the identity provider
 	// the scopes requested by ZITADEL during the request on the identity provider
 	// +listType=set
@@ -77,6 +81,10 @@ type InstanceGithubObservation struct {
 	// (Boolean) enable if users should be able to link an existing ZITADEL user with an external account
 	// enable if users should be able to link an existing ZITADEL user with an external account
 	IsLinkingAllowed *bool `json:"isLinkingAllowed,omitempty" tf:"is_linking_allowed,omitempty"`
+
+	// (String) Name of the IDP
+	// Name of the IDP
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Set of String) the scopes requested by ZITADEL during the request on the identity provider
 	// the scopes requested by ZITADEL during the request on the identity provider
@@ -120,6 +128,11 @@ type InstanceGithubParameters struct {
 	// enable if users should be able to link an existing ZITADEL user with an external account
 	// +kubebuilder:validation:Optional
 	IsLinkingAllowed *bool `json:"isLinkingAllowed,omitempty" tf:"is_linking_allowed,omitempty"`
+
+	// (String) Name of the IDP
+	// Name of the IDP
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Set of String) the scopes requested by ZITADEL during the request on the identity provider
 	// the scopes requested by ZITADEL during the request on the identity provider

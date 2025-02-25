@@ -104,6 +104,11 @@ func (in *OidcInitParameters) DeepCopyInto(out *OidcInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.OrgID != nil {
 		in, out := &in.OrgID, &out.OrgID
 		*out = new(string)
@@ -271,6 +276,11 @@ func (in *OidcObservation) DeepCopyInto(out *OidcObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.OrgID != nil {
 		in, out := &in.OrgID, &out.OrgID
 		*out = new(string)
@@ -399,6 +409,11 @@ func (in *OidcParameters) DeepCopyInto(out *OidcParameters) {
 	if in.IDTokenUserinfoAssertion != nil {
 		in, out := &in.IDTokenUserinfoAssertion, &out.IDTokenUserinfoAssertion
 		*out = new(bool)
+		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
 		**out = **in
 	}
 	if in.OrgID != nil {
