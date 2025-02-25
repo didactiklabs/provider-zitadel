@@ -13,6 +13,7 @@ import (
 	v1alpha1 "github.com/didactiklabs/provider-zitadel/apis/idp/v1alpha1"
 	v1alpha1apis "github.com/didactiklabs/provider-zitadel/apis/v1alpha1"
 	v1beta1 "github.com/didactiklabs/provider-zitadel/apis/v1beta1"
+	v1alpha1zitadel "github.com/didactiklabs/provider-zitadel/apis/zitadel/v1alpha1"
 )
 
 func init() {
@@ -21,6 +22,7 @@ func init() {
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,
+		v1alpha1zitadel.SchemeBuilder.AddToScheme,
 	)
 }
 

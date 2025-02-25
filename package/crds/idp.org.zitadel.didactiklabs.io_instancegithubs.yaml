@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: orggithubs.idp.zitadel.didactiklabs.io
+  name: instancegithubs.idp.org.zitadel.didactiklabs.io
 spec:
-  group: idp.zitadel.didactiklabs.io
+  group: idp.org.zitadel.didactiklabs.io
   names:
     categories:
     - crossplane
     - managed
     - zitadel
-    kind: OrgGithub
-    listKind: OrgGithubList
-    plural: orggithubs
-    singular: orggithub
+    kind: InstanceGithub
+    listKind: InstanceGithubList
+    plural: instancegithubs
+    singular: instancegithub
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: OrgGithub is the Schema for the OrgGithubs API. Resource representing
-          a GitHub IdP on the organization.
+        description: InstanceGithub is the Schema for the InstanceGithubs API. Resource
+          representing a GitHub IDP on the instance.
         properties:
           apiVersion:
             description: |-
@@ -55,7 +55,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: OrgGithubSpec defines the desired state of OrgGithub
+            description: InstanceGithubSpec defines the desired state of InstanceGithub
             properties:
               deletionPolicy:
                 default: Delete
@@ -122,11 +122,6 @@ spec:
                       (Boolean) enable if users should be able to link an existing ZITADEL user with an external account
                       enable if users should be able to link an existing ZITADEL user with an external account
                     type: boolean
-                  orgId:
-                    description: |-
-                      (String) ID of the organization
-                      ID of the organization
-                    type: string
                   scopes:
                     description: |-
                       (Set of String) the scopes requested by ZITADEL during the request on the identity provider
@@ -198,11 +193,6 @@ spec:
                       (Boolean) enable if users should be able to link an existing ZITADEL user with an external account
                       enable if users should be able to link an existing ZITADEL user with an external account
                     type: boolean
-                  orgId:
-                    description: |-
-                      (String) ID of the organization
-                      ID of the organization
-                    type: string
                   scopes:
                     description: |-
                       (Set of String) the scopes requested by ZITADEL during the request on the identity provider
@@ -406,7 +396,7 @@ spec:
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.isLinkingAllowed)
                 || (has(self.initProvider) && has(self.initProvider.isLinkingAllowed))'
           status:
-            description: OrgGithubStatus defines the observed state of OrgGithub.
+            description: InstanceGithubStatus defines the observed state of InstanceGithub.
             properties:
               atProvider:
                 properties:
@@ -443,11 +433,6 @@ spec:
                       (Boolean) enable if users should be able to link an existing ZITADEL user with an external account
                       enable if users should be able to link an existing ZITADEL user with an external account
                     type: boolean
-                  orgId:
-                    description: |-
-                      (String) ID of the organization
-                      ID of the organization
-                    type: string
                   scopes:
                     description: |-
                       (Set of String) the scopes requested by ZITADEL during the request on the identity provider

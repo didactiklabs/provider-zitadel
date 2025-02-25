@@ -12,6 +12,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Import requires using a randomly generated ID from provider: nl-2e21sda
 	"zitadel_idp_github":     config.NameAsIdentifier,
 	"zitadel_org_idp_github": config.NameAsIdentifier,
+	"zitadel_org":            config.NameAsIdentifier,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
