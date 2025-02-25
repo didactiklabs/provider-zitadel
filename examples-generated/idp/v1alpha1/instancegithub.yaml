@@ -1,8 +1,8 @@
 apiVersion: idp.zitadel.didactiklabs.io/v1alpha1
-kind: Github
+kind: InstanceGithub
 metadata:
   annotations:
-    meta.upbound.io/example-id: idp/v1alpha1/github
+    meta.upbound.io/example-id: idp/v1alpha1/instancegithub
   labels:
     testing.upbound.io/example-name: default
   name: default

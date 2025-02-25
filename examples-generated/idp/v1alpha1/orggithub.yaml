@@ -1,0 +1,25 @@
+apiVersion: idp.org.zitadel.didactiklabs.io/v1alpha1
+kind: OrgGithub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: idp/v1alpha1/orggithub
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    autoLinking: AUTO_LINKING_OPTION_USERNAME
+    clientId: 86a165...
+    clientSecretSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    isAutoCreation: false
+    isAutoUpdate: true
+    isCreationAllowed: true
+    isLinkingAllowed: false
+    orgId: ${data.zitadel_org.default.id}
+    scopes:
+    - openid
+    - profile
+    - email

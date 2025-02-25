@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type GithubInitParameters struct {
+type InstanceGithubInitParameters struct {
 
 	// (String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL
 	// Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL
@@ -49,7 +49,7 @@ type GithubInitParameters struct {
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 }
 
-type GithubObservation struct {
+type InstanceGithubObservation struct {
 
 	// (String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL
 	// Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL
@@ -84,7 +84,7 @@ type GithubObservation struct {
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 }
 
-type GithubParameters struct {
+type InstanceGithubParameters struct {
 
 	// (String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL
 	// Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL
@@ -128,10 +128,10 @@ type GithubParameters struct {
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 }
 
-// GithubSpec defines the desired state of Github
-type GithubSpec struct {
+// InstanceGithubSpec defines the desired state of InstanceGithub
+type InstanceGithubSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     GithubParameters `json:"forProvider"`
+	ForProvider     InstanceGithubParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -142,26 +142,26 @@ type GithubSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider GithubInitParameters `json:"initProvider,omitempty"`
+	InitProvider InstanceGithubInitParameters `json:"initProvider,omitempty"`
 }
 
-// GithubStatus defines the observed state of Github.
-type GithubStatus struct {
+// InstanceGithubStatus defines the observed state of InstanceGithub.
+type InstanceGithubStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        GithubObservation `json:"atProvider,omitempty"`
+	AtProvider        InstanceGithubObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Github is the Schema for the Githubs API. Resource representing a GitHub IDP on the instance.
+// InstanceGithub is the Schema for the InstanceGithubs API. Resource representing a GitHub IDP on the instance.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,zitadel}
-type Github struct {
+type InstanceGithub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientId) || (has(self.initProvider) && has(self.initProvider.clientId))",message="spec.forProvider.clientId is a required parameter"
@@ -170,27 +170,27 @@ type Github struct {
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.isAutoUpdate) || (has(self.initProvider) && has(self.initProvider.isAutoUpdate))",message="spec.forProvider.isAutoUpdate is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.isCreationAllowed) || (has(self.initProvider) && has(self.initProvider.isCreationAllowed))",message="spec.forProvider.isCreationAllowed is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.isLinkingAllowed) || (has(self.initProvider) && has(self.initProvider.isLinkingAllowed))",message="spec.forProvider.isLinkingAllowed is a required parameter"
-	Spec   GithubSpec   `json:"spec"`
-	Status GithubStatus `json:"status,omitempty"`
+	Spec   InstanceGithubSpec   `json:"spec"`
+	Status InstanceGithubStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// GithubList contains a list of Githubs
-type GithubList struct {
+// InstanceGithubList contains a list of InstanceGithubs
+type InstanceGithubList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Github `json:"items"`
+	Items           []InstanceGithub `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	Github_Kind             = "Github"
-	Github_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Github_Kind}.String()
-	Github_KindAPIVersion   = Github_Kind + "." + CRDGroupVersion.String()
-	Github_GroupVersionKind = CRDGroupVersion.WithKind(Github_Kind)
+	InstanceGithub_Kind             = "InstanceGithub"
+	InstanceGithub_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: InstanceGithub_Kind}.String()
+	InstanceGithub_KindAPIVersion   = InstanceGithub_Kind + "." + CRDGroupVersion.String()
+	InstanceGithub_GroupVersionKind = CRDGroupVersion.WithKind(InstanceGithub_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&Github{}, &GithubList{})
+	SchemeBuilder.Register(&InstanceGithub{}, &InstanceGithubList{})
 }

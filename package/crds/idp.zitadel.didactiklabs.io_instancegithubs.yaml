@@ -4,7 +4,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: githubs.idp.zitadel.didactiklabs.io
+  name: instancegithubs.idp.zitadel.didactiklabs.io
 spec:
   group: idp.zitadel.didactiklabs.io
   names:
@@ -12,10 +12,10 @@ spec:
     - crossplane
     - managed
     - zitadel
-    kind: Github
-    listKind: GithubList
-    plural: githubs
-    singular: github
+    kind: InstanceGithub
+    listKind: InstanceGithubList
+    plural: instancegithubs
+    singular: instancegithub
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Github is the Schema for the Githubs API. Resource representing
-          a GitHub IDP on the instance.
+        description: InstanceGithub is the Schema for the InstanceGithubs API. Resource
+          representing a GitHub IDP on the instance.
         properties:
           apiVersion:
             description: |-
@@ -55,7 +55,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: GithubSpec defines the desired state of Github
+            description: InstanceGithubSpec defines the desired state of InstanceGithub
             properties:
               deletionPolicy:
                 default: Delete
@@ -396,7 +396,7 @@ spec:
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.isLinkingAllowed)
                 || (has(self.initProvider) && has(self.initProvider.isLinkingAllowed))'
           status:
-            description: GithubStatus defines the observed state of Github.
+            description: InstanceGithubStatus defines the observed state of InstanceGithub.
             properties:
               atProvider:
                 properties:

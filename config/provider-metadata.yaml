@@ -1,18 +1,5 @@
 name: zitadel/zitadel
 resources:
-    ZITADEL:
-        subCategory: ""
-        description: Provider to manage resources on ZITADEL
-        name: ZITADEL
-        title: ZITADEL
-        argumentDocs:
-            domain: (String) Domain used to connect to the ZITADEL instance
-            insecure: (Boolean) Use insecure connection
-            jwt_profile_file: (String) Path to the file containing credentials to connect to ZITADEL. Either 'jwt_profile_file' or 'jwt_profile_json' is required
-            jwt_profile_json: (String) JSON value of credentials to connect to ZITADEL. Either 'jwt_profile_file' or 'jwt_profile_json' is required
-            port: (String) Used port if not the default ports 80 or 443 are configured
-            token: (String) Path to the file containing credentials to connect to ZITADEL
-        importStatements: []
     zitadel_action:
         subCategory: ""
         description: Resource representing an action belonging to an organization.
@@ -31,21 +18,6 @@ resources:
               references:
                 org_id: data.zitadel_org.default.id
         argumentDocs:
-            allowed_to_fail: (Boolean) when true, the next action will be called even if this action fails
-            id: (String) The ID of this resource.
-            name: (String)
-            org_id: (String) ID of the organization
-            script: (String)
-            state: (Number) the state of the action
-            timeout: (String) after which time the action will be terminated if not finished
-        importStatements: []
-    zitadel_action Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing an action belonging to an organization.
-        name: zitadel_action Data Source - terraform-provider-zitadel
-        title: zitadel_action Data Source - terraform-provider-zitadel
-        argumentDocs:
-            action_id: (String) The ID of this resource.
             allowed_to_fail: (Boolean) when true, the next action will be called even if this action fails
             id: (String) The ID of this resource.
             name: (String)
@@ -77,33 +49,6 @@ resources:
             client_secret: (String, Sensitive) generated secret for this config
             id: (String) The ID of this resource.
             name: (String) Name of the application
-            org_id: (String) ID of the organization
-            project_id: (String) ID of the project
-        importStatements: []
-    zitadel_application_api Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing an API application belonging to a project, with all configuration possibilities.
-        name: zitadel_application_api Data Source - terraform-provider-zitadel
-        title: zitadel_application_api Data Source - terraform-provider-zitadel
-        argumentDocs:
-            app_id: (String) The ID of this resource.
-            auth_method_type: (String) Auth method type
-            client_id: (String, Sensitive) generated ID for this config
-            id: (String) The ID of this resource.
-            name: (String) Name of the application
-            org_id: (String) ID of the organization
-            project_id: (String) ID of the project
-        importStatements: []
-    zitadel_application_apis Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing multiple API applications belonging to a project.
-        name: zitadel_application_apis Data Source - terraform-provider-zitadel
-        title: zitadel_application_apis Data Source - terraform-provider-zitadel
-        argumentDocs:
-            app_ids: (List of String) A set of all IDs.
-            id: (String) The ID of this resource.
-            name: (String) Name of the application
-            name_method: '(String) Method for querying applications by name, supported values: TEXT_QUERY_METHOD_EQUALS, TEXT_QUERY_METHOD_EQUALS_IGNORE_CASE, TEXT_QUERY_METHOD_STARTS_WITH, TEXT_QUERY_METHOD_STARTS_WITH_IGNORE_CASE, TEXT_QUERY_METHOD_CONTAINS, TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE, TEXT_QUERY_METHOD_ENDS_WITH, TEXT_QUERY_METHOD_ENDS_WITH_IGNORE_CASE'
             org_id: (String) ID of the organization
             project_id: (String) ID of the project
         importStatements: []
@@ -197,47 +142,6 @@ resources:
             skip_native_app_success_page: (Boolean) Skip the successful login page on native apps and directly redirect the user to the callback.
             version: '(String) Version, supported values: OIDC_VERSION_1_0'
         importStatements: []
-    zitadel_application_oidc Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing an OIDC application belonging to a project, with all configuration possibilities.
-        name: zitadel_application_oidc Data Source - terraform-provider-zitadel
-        title: zitadel_application_oidc Data Source - terraform-provider-zitadel
-        argumentDocs:
-            access_token_role_assertion: (Boolean) Access token role assertion
-            access_token_type: (String) Access token type
-            additional_origins: (List of String) Additional origins
-            app_id: (String) The ID of this resource.
-            app_type: (String) App type
-            auth_method_type: (String) Auth method type
-            client_id: (String, Sensitive) Client ID
-            clock_skew: (String) Clockskew
-            dev_mode: (Boolean) Dev mode
-            grant_types: (List of String) Grant types
-            id: (String) The ID of this resource.
-            id_token_role_assertion: (Boolean) ID token role assertion
-            id_token_userinfo_assertion: (Boolean) Token userinfo assertion
-            name: (String) Name of the application
-            org_id: (String) ID of the organization
-            post_logout_redirect_uris: (List of String) Post logout redirect URIs
-            project_id: (String) ID of the project
-            redirect_uris: (List of String) RedirectURIs
-            response_types: (List of String) Response type
-            skip_native_app_success_page: (Boolean) Skip the successful login page on native apps and directly redirect the user to the callback.
-            version: (String) Version
-        importStatements: []
-    zitadel_application_oidcs Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing multiple OIDC applications belonging to a project.
-        name: zitadel_application_oidcs Data Source - terraform-provider-zitadel
-        title: zitadel_application_oidcs Data Source - terraform-provider-zitadel
-        argumentDocs:
-            app_ids: (List of String) A set of all IDs.
-            id: (String) The ID of this resource.
-            name: (String) Name of the application
-            name_method: '(String) Method for querying applications by name, supported values: TEXT_QUERY_METHOD_EQUALS, TEXT_QUERY_METHOD_EQUALS_IGNORE_CASE, TEXT_QUERY_METHOD_STARTS_WITH, TEXT_QUERY_METHOD_STARTS_WITH_IGNORE_CASE, TEXT_QUERY_METHOD_CONTAINS, TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE, TEXT_QUERY_METHOD_ENDS_WITH, TEXT_QUERY_METHOD_ENDS_WITH_IGNORE_CASE'
-            org_id: (String) ID of the organization
-            project_id: (String) ID of the project
-        importStatements: []
     zitadel_application_saml:
         subCategory: ""
         description: Resource representing a SAML application belonging to a project, with all configuration possibilities.
@@ -259,32 +163,6 @@ resources:
             id: (String) The ID of this resource.
             metadata_xml: (String, Sensitive) Metadata as XML file
             name: (String) Name of the application
-            org_id: (String) ID of the organization
-            project_id: (String) ID of the project
-        importStatements: []
-    zitadel_application_saml Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a SAML application belonging to a project, with all configuration possibilities.
-        name: zitadel_application_saml Data Source - terraform-provider-zitadel
-        title: zitadel_application_saml Data Source - terraform-provider-zitadel
-        argumentDocs:
-            app_id: (String) The ID of this resource.
-            id: (String) The ID of this resource.
-            metadata_xml: (String) Metadata as XML file
-            name: (String) Name of the application
-            org_id: (String) ID of the organization
-            project_id: (String) ID of the project
-        importStatements: []
-    zitadel_application_samls Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing multiple SAML applications belonging to a project.
-        name: zitadel_application_samls Data Source - terraform-provider-zitadel
-        title: zitadel_application_samls Data Source - terraform-provider-zitadel
-        argumentDocs:
-            app_ids: (List of String) A set of all IDs.
-            id: (String) The ID of this resource.
-            name: (String) Name of the application
-            name_method: '(String) Method for querying applications by name, supported values: TEXT_QUERY_METHOD_EQUALS, TEXT_QUERY_METHOD_EQUALS_IGNORE_CASE, TEXT_QUERY_METHOD_STARTS_WITH, TEXT_QUERY_METHOD_STARTS_WITH_IGNORE_CASE, TEXT_QUERY_METHOD_CONTAINS, TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE, TEXT_QUERY_METHOD_ENDS_WITH, TEXT_QUERY_METHOD_ENDS_WITH_IGNORE_CASE'
             org_id: (String) ID of the organization
             project_id: (String) ID of the project
         importStatements: []
@@ -949,18 +827,6 @@ resources:
             refresh_token_expiration: (String) expiration duration of refresh tokens
             refresh_token_idle_expiration: (String) expiration duration of idle refresh tokens
         importStatements: []
-    zitadel_default_oidc_settings Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing the default oidc settings.
-        name: zitadel_default_oidc_settings Data Source - terraform-provider-zitadel
-        title: zitadel_default_oidc_settings Data Source - terraform-provider-zitadel
-        argumentDocs:
-            access_token_lifetime: (String) lifetime duration of access tokens
-            id: (String) The ID of this resource.
-            id_token_lifetime: (String) lifetime duration of id tokens
-            refresh_token_expiration: (String) expiration duration of refresh tokens
-            refresh_token_idle_expiration: (String) expiration duration of idle refresh tokens
-        importStatements: []
     zitadel_default_password_change_message_text:
         subCategory: ""
         name: zitadel_default_password_change_message_text
@@ -1311,30 +1177,6 @@ resources:
             state: (String) State of the user
             user_name: (String) Username
         importStatements: []
-    zitadel_human_user Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a human user situated under an organization, which then can be authorized through memberships or direct grants on other resources.
-        name: zitadel_human_user Data Source - terraform-provider-zitadel
-        title: zitadel_human_user Data Source - terraform-provider-zitadel
-        argumentDocs:
-            display_name: (String) Display name of the user
-            email: (String) Email of the user
-            first_name: (String) First name of the user
-            gender: (String) Gender of the user
-            id: (String) The ID of this resource.
-            is_email_verified: (Boolean) Is the email verified of the user, can only be true if password of the user is set
-            is_phone_verified: (Boolean) Is the phone verified of the user
-            last_name: (String) Last name of the user
-            login_names: (List of String) Loginnames
-            nick_name: (String) Nick name of the user
-            org_id: (String) ID of the organization
-            phone: (String) Phone of the user
-            preferred_language: (String) Preferred language of the user
-            preferred_login_name: (String) Preferred login name
-            state: (String) State of the user
-            user_id: (String) The ID of this resource.
-            user_name: (String) Username
-        importStatements: []
     zitadel_idp_azure_ad:
         subCategory: ""
         description: Resource representing an Azure AD IDP on the instance.
@@ -1376,26 +1218,6 @@ resources:
             tenant_id: (String) if tenant_id is not set, the tenant_type is used
             tenant_type: (String) the azure ad tenant type
         importStatements: []
-    zitadel_idp_azure_ad Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing an Azure AD IDP on the instance.
-        name: zitadel_idp_azure_ad Data Source - terraform-provider-zitadel
-        title: zitadel_idp_azure_ad Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            client_id: (String) client id generated by the identity provider
-            client_secret: (String, Sensitive) client secret generated by the identity provider
-            email_verified: (Boolean) automatically mark emails as verified
-            id: (String) The ID of this resource.
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
-            name: (String) Name of the IDP
-            scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
-            tenant_id: (String) the azure ad tenant id
-            tenant_type: (String) the azure ad tenant type
-        importStatements: []
     zitadel_idp_github:
         subCategory: ""
         description: Resource representing a GitHub IDP on the instance.
@@ -1428,23 +1250,6 @@ resources:
             is_auto_update: (Boolean) enable if a the ZITADEL account fields should be updated automatically on each login
             is_creation_allowed: (Boolean) enable if users should be able to create a new account in ZITADEL when using an external account
             is_linking_allowed: (Boolean) enable if users should be able to link an existing ZITADEL user with an external account
-            name: (String) Name of the IDP
-            scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
-        importStatements: []
-    zitadel_idp_github Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a GitHub IDP on the instance.
-        name: zitadel_idp_github Data Source - terraform-provider-zitadel
-        title: zitadel_idp_github Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            client_id: (String) client id generated by the identity provider
-            client_secret: (String, Sensitive) client secret generated by the identity provider
-            id: (String) The ID of this resource.
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
             name: (String) Name of the IDP
             scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
         importStatements: []
@@ -1489,26 +1294,6 @@ resources:
             token_endpoint: (String) the providers token endpoint
             user_endpoint: (String) the providers user endpoint
         importStatements: []
-    zitadel_idp_github_es Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a GitHub Enterprise IDP on the instance.
-        name: zitadel_idp_github_es Data Source - terraform-provider-zitadel
-        title: zitadel_idp_github_es Data Source - terraform-provider-zitadel
-        argumentDocs:
-            authorization_endpoint: (String) the providers authorization endpoint
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            client_id: (String) client id generated by the identity provider
-            client_secret: (String, Sensitive) client secret generated by the identity provider
-            id: (String) The ID of this resource.
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
-            name: (String) Name of the IDP
-            scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
-            token_endpoint: (String) the providers token endpoint
-            user_endpoint: (String) the providers user endpoint
-        importStatements: []
     zitadel_idp_gitlab:
         subCategory: ""
         description: Resource representing a GitLab IDP on the instance.
@@ -1541,23 +1326,6 @@ resources:
             is_auto_update: (Boolean) enable if a the ZITADEL account fields should be updated automatically on each login
             is_creation_allowed: (Boolean) enable if users should be able to create a new account in ZITADEL when using an external account
             is_linking_allowed: (Boolean) enable if users should be able to link an existing ZITADEL user with an external account
-            name: (String) Name of the IDP
-            scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
-        importStatements: []
-    zitadel_idp_gitlab Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a GitLab IDP on the instance.
-        name: zitadel_idp_gitlab Data Source - terraform-provider-zitadel
-        title: zitadel_idp_gitlab Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            client_id: (String) client id generated by the identity provider
-            client_secret: (String, Sensitive) client secret generated by the identity provider
-            id: (String) The ID of this resource.
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
             name: (String) Name of the IDP
             scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
         importStatements: []
@@ -1598,24 +1366,6 @@ resources:
             name: (String) Name of the IDP
             scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
         importStatements: []
-    zitadel_idp_gitlab_self_hosted Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a GitLab Self Hosted IDP on the instance.
-        name: zitadel_idp_gitlab_self_hosted Data Source - terraform-provider-zitadel
-        title: zitadel_idp_gitlab_self_hosted Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            client_id: (String) client id generated by the identity provider
-            client_secret: (String, Sensitive) client secret generated by the identity provider
-            id: (String) The ID of this resource.
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
-            issuer: (String) the providers issuer
-            name: (String) Name of the IDP
-            scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
-        importStatements: []
     zitadel_idp_google:
         subCategory: ""
         description: Resource representing a Google IDP on the instance.
@@ -1648,23 +1398,6 @@ resources:
             is_auto_update: (Boolean) enable if a the ZITADEL account fields should be updated automatically on each login
             is_creation_allowed: (Boolean) enable if users should be able to create a new account in ZITADEL when using an external account
             is_linking_allowed: (Boolean) enable if users should be able to link an existing ZITADEL user with an external account
-            name: (String) Name of the IDP
-            scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
-        importStatements: []
-    zitadel_idp_google Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a Google IDP on the instance.
-        name: zitadel_idp_google Data Source - terraform-provider-zitadel
-        title: zitadel_idp_google Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            client_id: (String) client id generated by the identity provider
-            client_secret: (String, Sensitive) client secret generated by the identity provider
-            id: (String) The ID of this resource.
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
             name: (String) Name of the IDP
             scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
         importStatements: []
@@ -1735,42 +1468,6 @@ resources:
             user_filters: (Set of String) User filters for LDAP connections
             user_object_classes: (Set of String) User object classes for LDAP connections
         importStatements: []
-    zitadel_idp_ldap Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing an LDAP IDP on the instance.
-        name: zitadel_idp_ldap Data Source - terraform-provider-zitadel
-        title: zitadel_idp_ldap Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            avatar_url_attribute: (String) User attribute for the avatar url
-            base_dn: (String) Base DN for LDAP connections
-            bind_dn: (String) Bind DN for LDAP connections
-            bind_password: (String, Sensitive) Bind password for LDAP connections
-            display_name_attribute: (String) User attribute for the display name
-            email_attribute: (String) User attribute for the email
-            email_verified_attribute: (String) User attribute for the email verified state
-            first_name_attribute: (String) User attribute for the first name
-            id: (String) The ID of this resource.
-            id_attribute: (String) User attribute for the id
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
-            last_name_attribute: (String) User attribute for the last name
-            name: (String) Name of the IDP
-            nick_name_attribute: (String) User attribute for the nick name
-            phone_attribute: (String) User attribute for the phone
-            phone_verified_attribute: (String) User attribute for the phone verified state
-            preferred_language_attribute: (String) User attribute for the preferred language
-            preferred_username_attribute: (String) User attribute for the preferred username
-            profile_attribute: (String) User attribute for the profile
-            servers: (List of String) Servers to try in order for establishing LDAP connections
-            start_tls: (Boolean) Wether to use StartTLS for LDAP connections
-            timeout: (String) Timeout for LDAP connections
-            user_base: (String) User base for LDAP connections
-            user_filters: (Set of String) User filters for LDAP connections
-            user_object_classes: (Set of String) User object classes for LDAP connections
-        importStatements: []
     zitadel_idp_oauth:
         subCategory: ""
         description: Resource representing a generic OAuth2 IDP on the instance.
@@ -1814,27 +1511,6 @@ resources:
             token_endpoint: (String) The token endpoint
             user_endpoint: (String) The user endpoint
         importStatements: []
-    zitadel_idp_oauth Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a generic OAuth2 IDP on the instance.
-        name: zitadel_idp_oauth Data Source - terraform-provider-zitadel
-        title: zitadel_idp_oauth Data Source - terraform-provider-zitadel
-        argumentDocs:
-            authorization_endpoint: (String) The authorization endpoint
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            client_id: (String) client id generated by the identity provider
-            client_secret: (String, Sensitive) client secret generated by the identity provider
-            id: (String) The ID of this resource.
-            id_attribute: (String) The id attribute
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
-            name: (String) Name of the IDP
-            scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
-            token_endpoint: (String) The token endpoint
-            user_endpoint: (String) The user endpoint
-        importStatements: []
     zitadel_idp_saml:
         subCategory: ""
         description: Resource representing a SAML IDP on the instance.
@@ -1865,23 +1541,6 @@ resources:
             metadata_xml: (String) The metadata XML as plain string
             name: (String) Name of the IDP
             with_signed_request: (Boolean) Whether the SAML IDP requires signed requests
-        importStatements: []
-    zitadel_idp_saml Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a SAML IDP on the instance.
-        name: zitadel_idp_saml Data Source - terraform-provider-zitadel
-        title: zitadel_idp_saml Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            binding: (String) The binding
-            id: (String) The ID of this resource.
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
-            metadata_xml: (String) The metadata XML as plain string
-            name: (String) Name of the IDP
-            with_signed_request: (String) Whether the SAML IDP requires signed requests
         importStatements: []
     zitadel_init_message_text:
         subCategory: ""
@@ -2558,35 +2217,6 @@ resources:
             user_name: (String) Username
             with_secret: (Boolean) Generate machine secret, only applicable if creation or change from false
         importStatements: []
-    zitadel_machine_user Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a serviceaccount situated under an organization, which then can be authorized through memberships or direct grants on other resources.
-        name: zitadel_machine_user Data Source - terraform-provider-zitadel
-        title: zitadel_machine_user Data Source - terraform-provider-zitadel
-        argumentDocs:
-            access_token_type: (String) Access token type
-            description: (String) Description of the user
-            id: (String) The ID of this resource.
-            login_names: (List of String) Loginnames
-            name: (String) Name of the machine user
-            org_id: (String) ID of the organization
-            preferred_login_name: (String) Preferred login name
-            state: (String) State of the user
-            user_id: (String) The ID of this resource.
-            user_name: (String) Username
-        importStatements: []
-    zitadel_machine_users Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a serviceaccount situated under an organization, which then can be authorized through memberships or direct grants on other resources.
-        name: zitadel_machine_users Data Source - terraform-provider-zitadel
-        title: zitadel_machine_users Data Source - terraform-provider-zitadel
-        argumentDocs:
-            id: (String) The ID of this resource.
-            org_id: (String) ID of the organization
-            user_ids: (List of String) A set of all IDs.
-            user_name: (String) Username
-            user_name_method: '(String) Method for querying machine users by username, supported values: TEXT_QUERY_METHOD_EQUALS, TEXT_QUERY_METHOD_EQUALS_IGNORE_CASE, TEXT_QUERY_METHOD_STARTS_WITH, TEXT_QUERY_METHOD_STARTS_WITH_IGNORE_CASE, TEXT_QUERY_METHOD_CONTAINS, TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE, TEXT_QUERY_METHOD_ENDS_WITH, TEXT_QUERY_METHOD_ENDS_WITH_IGNORE_CASE'
-        importStatements: []
     zitadel_notification_policy:
         subCategory: ""
         description: Resource representing the custom notification policy of an organization.
@@ -2623,18 +2253,6 @@ resources:
             name: (String) Name of the org
             primary_domain: (String) Primary domain of the org
             state: (String) State of the org
-        importStatements: []
-    zitadel_org Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
-        name: zitadel_org Data Source - terraform-provider-zitadel
-        title: zitadel_org Data Source - terraform-provider-zitadel
-        argumentDocs:
-            id: (String) ID of the organization
-            is_default: (Boolean) Indicates whether the org is the default org of the instance.
-            name: (String) Name of the org.
-            primary_domain: (String) Primary domain of the org
-            state: '(String) State of the org, supported values: ORG_STATE_UNSPECIFIED, ORG_STATE_ACTIVE, ORG_STATE_INACTIVE, ORG_STATE_REMOVED'
         importStatements: []
     zitadel_org_idp_azure_ad:
         subCategory: ""
@@ -2681,27 +2299,6 @@ resources:
             tenant_id: (String) if tenant_id is not set, the tenant_type is used
             tenant_type: (String) the azure ad tenant type
         importStatements: []
-    zitadel_org_idp_azure_ad Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing an Azure AD IdP of the organization.
-        name: zitadel_org_idp_azure_ad Data Source - terraform-provider-zitadel
-        title: zitadel_org_idp_azure_ad Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            client_id: (String) client id generated by the identity provider
-            client_secret: (String, Sensitive) client secret generated by the identity provider
-            email_verified: (Boolean) automatically mark emails as verified
-            id: (String) The ID of this resource.
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
-            name: (String) Name of the IDP
-            org_id: (String) ID of the organization
-            scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
-            tenant_id: (String) the azure ad tenant id
-            tenant_type: (String) the azure ad tenant type
-        importStatements: []
     zitadel_org_idp_github:
         subCategory: ""
         description: Resource representing a GitHub IdP on the organization.
@@ -2737,24 +2334,6 @@ resources:
             is_auto_update: (Boolean) enable if a the ZITADEL account fields should be updated automatically on each login
             is_creation_allowed: (Boolean) enable if users should be able to create a new account in ZITADEL when using an external account
             is_linking_allowed: (Boolean) enable if users should be able to link an existing ZITADEL user with an external account
-            name: (String) Name of the IDP
-            org_id: (String) ID of the organization
-            scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
-        importStatements: []
-    zitadel_org_idp_github Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a GitHub IdP of the organization.
-        name: zitadel_org_idp_github Data Source - terraform-provider-zitadel
-        title: zitadel_org_idp_github Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            client_id: (String) client id generated by the identity provider
-            client_secret: (String, Sensitive) client secret generated by the identity provider
-            id: (String) The ID of this resource.
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
             name: (String) Name of the IDP
             org_id: (String) ID of the organization
             scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
@@ -2804,27 +2383,6 @@ resources:
             token_endpoint: (String) the providers token endpoint
             user_endpoint: (String) the providers user endpoint
         importStatements: []
-    zitadel_org_idp_github_es Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a GitHub Enterprise IdP of the organization.
-        name: zitadel_org_idp_github_es Data Source - terraform-provider-zitadel
-        title: zitadel_org_idp_github_es Data Source - terraform-provider-zitadel
-        argumentDocs:
-            authorization_endpoint: (String) the providers authorization endpoint
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            client_id: (String) client id generated by the identity provider
-            client_secret: (String, Sensitive) client secret generated by the identity provider
-            id: (String) The ID of this resource.
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
-            name: (String) Name of the IDP
-            org_id: (String) ID of the organization
-            scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
-            token_endpoint: (String) the providers token endpoint
-            user_endpoint: (String) the providers user endpoint
-        importStatements: []
     zitadel_org_idp_gitlab:
         subCategory: ""
         description: Resource representing a GitLab IdP on the organization.
@@ -2860,24 +2418,6 @@ resources:
             is_auto_update: (Boolean) enable if a the ZITADEL account fields should be updated automatically on each login
             is_creation_allowed: (Boolean) enable if users should be able to create a new account in ZITADEL when using an external account
             is_linking_allowed: (Boolean) enable if users should be able to link an existing ZITADEL user with an external account
-            name: (String) Name of the IDP
-            org_id: (String) ID of the organization
-            scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
-        importStatements: []
-    zitadel_org_idp_gitlab Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a GitLab IdP of the organization.
-        name: zitadel_org_idp_gitlab Data Source - terraform-provider-zitadel
-        title: zitadel_org_idp_gitlab Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            client_id: (String) client id generated by the identity provider
-            client_secret: (String, Sensitive) client secret generated by the identity provider
-            id: (String) The ID of this resource.
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
             name: (String) Name of the IDP
             org_id: (String) ID of the organization
             scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
@@ -2923,25 +2463,6 @@ resources:
             org_id: (String) ID of the organization
             scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
         importStatements: []
-    zitadel_org_idp_gitlab_self_hosted Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a GitLab Self Hosted IdP of the organization.
-        name: zitadel_org_idp_gitlab_self_hosted Data Source - terraform-provider-zitadel
-        title: zitadel_org_idp_gitlab_self_hosted Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            client_id: (String) client id generated by the identity provider
-            client_secret: (String, Sensitive) client secret generated by the identity provider
-            id: (String) The ID of this resource.
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
-            issuer: (String) the providers issuer
-            name: (String) Name of the IDP
-            org_id: (String) ID of the organization
-            scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
-        importStatements: []
     zitadel_org_idp_google:
         subCategory: ""
         description: Resource representing a Google IdP on the organization.
@@ -2977,24 +2498,6 @@ resources:
             is_auto_update: (Boolean) enable if a the ZITADEL account fields should be updated automatically on each login
             is_creation_allowed: (Boolean) enable if users should be able to create a new account in ZITADEL when using an external account
             is_linking_allowed: (Boolean) enable if users should be able to link an existing ZITADEL user with an external account
-            name: (String) Name of the IDP
-            org_id: (String) ID of the organization
-            scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
-        importStatements: []
-    zitadel_org_idp_google Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a Google IdP of the organization.
-        name: zitadel_org_idp_google Data Source - terraform-provider-zitadel
-        title: zitadel_org_idp_google Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            client_id: (String) client id generated by the identity provider
-            client_secret: (String, Sensitive) client secret generated by the identity provider
-            id: (String) The ID of this resource.
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
             name: (String) Name of the IDP
             org_id: (String) ID of the organization
             scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
@@ -3101,43 +2604,6 @@ resources:
             user_filters: (Set of String) User filters for LDAP connections
             user_object_classes: (Set of String) User object classes for LDAP connections
         importStatements: []
-    zitadel_org_idp_ldap Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing an LDAP IdP on the organization.
-        name: zitadel_org_idp_ldap Data Source - terraform-provider-zitadel
-        title: zitadel_org_idp_ldap Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            avatar_url_attribute: (String) User attribute for the avatar url
-            base_dn: (String) Base DN for LDAP connections
-            bind_dn: (String) Bind DN for LDAP connections
-            bind_password: (String, Sensitive) Bind password for LDAP connections
-            display_name_attribute: (String) User attribute for the display name
-            email_attribute: (String) User attribute for the email
-            email_verified_attribute: (String) User attribute for the email verified state
-            first_name_attribute: (String) User attribute for the first name
-            id: (String) The ID of this resource.
-            id_attribute: (String) User attribute for the id
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
-            last_name_attribute: (String) User attribute for the last name
-            name: (String) Name of the IDP
-            nick_name_attribute: (String) User attribute for the nick name
-            org_id: (String) ID of the organization
-            phone_attribute: (String) User attribute for the phone
-            phone_verified_attribute: (String) User attribute for the phone verified state
-            preferred_language_attribute: (String) User attribute for the preferred language
-            preferred_username_attribute: (String) User attribute for the preferred username
-            profile_attribute: (String) User attribute for the profile
-            servers: (List of String) Servers to try in order for establishing LDAP connections
-            start_tls: (Boolean) Wether to use StartTLS for LDAP connections
-            timeout: (String) Timeout for LDAP connections
-            user_base: (String) User base for LDAP connections
-            user_filters: (Set of String) User filters for LDAP connections
-            user_object_classes: (Set of String) User object classes for LDAP connections
-        importStatements: []
     zitadel_org_idp_oauth:
         subCategory: ""
         description: Resource representing a generic OAuth2 IDP on the organization.
@@ -3179,28 +2645,6 @@ resources:
             is_auto_update: (Boolean) enable if a the ZITADEL account fields should be updated automatically on each login
             is_creation_allowed: (Boolean) enable if users should be able to create a new account in ZITADEL when using an external account
             is_linking_allowed: (Boolean) enable if users should be able to link an existing ZITADEL user with an external account
-            name: (String) Name of the IDP
-            org_id: (String) ID of the organization
-            scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
-            token_endpoint: (String) The token endpoint
-            user_endpoint: (String) The user endpoint
-        importStatements: []
-    zitadel_org_idp_oauth Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a generic OAuth2 IDP of the organization.
-        name: zitadel_org_idp_oauth Data Source - terraform-provider-zitadel
-        title: zitadel_org_idp_oauth Data Source - terraform-provider-zitadel
-        argumentDocs:
-            authorization_endpoint: (String) The authorization endpoint
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            client_id: (String) client id generated by the identity provider
-            client_secret: (String, Sensitive) client secret generated by the identity provider
-            id: (String) The ID of this resource.
-            id_attribute: (String) The id attribute
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
             name: (String) Name of the IDP
             org_id: (String) ID of the organization
             scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
@@ -3285,41 +2729,6 @@ resources:
             org_id: (String) ID of the organization
             with_signed_request: (Boolean) Whether the SAML IDP requires signed requests
         importStatements: []
-    zitadel_org_idp_saml Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a SAML IdP of the organization.
-        name: zitadel_org_idp_saml Data Source - terraform-provider-zitadel
-        title: zitadel_org_idp_saml Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            binding: (String) The binding
-            id: (String) The ID of this resource.
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
-            metadata_xml: (String) The metadata XML as plain string
-            name: (String) Name of the IDP
-            org_id: (String) ID of the organization
-            with_signed_request: (String) Whether the SAML IDP requires signed requests
-        importStatements: []
-    zitadel_org_jwt_idp Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a generic JWT IdP on the organization.
-        name: zitadel_org_jwt_idp Data Source - terraform-provider-zitadel
-        title: zitadel_org_jwt_idp Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_register: (Boolean) auto register for users from this idp
-            header_name: (String) the name of the header where the JWT is sent in, default is authorization
-            id: (String) The ID of this resource.
-            idp_id: (String) The ID of this resource.
-            issuer: (String) the issuer of the jwt (for validation)
-            jwt_endpoint: (String) the endpoint where the jwt can be extracted
-            keys_endpoint: (String) the endpoint to the key (JWK) which are used to sign the JWT with
-            name: (String) Name of the IDP
-            org_id: (String) ID of the organization
-            styling_type: (String) Some identity providers specify the styling of the button to their login
-        importStatements: []
     zitadel_org_member:
         subCategory: ""
         description: Resource representing the membership of a user on an organization, defined with the given role.
@@ -3364,41 +2773,6 @@ resources:
             key: (String) The key of a metadata entry
             org_id: (String) ID of the organization
             value: (String) The string representation of a metadata entry value. For binary data, use the base64encode function.
-        importStatements: []
-    zitadel_org_oidc_idp Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing a generic OIDC IdP on the organization.
-        name: zitadel_org_oidc_idp Data Source - terraform-provider-zitadel
-        title: zitadel_org_oidc_idp Data Source - terraform-provider-zitadel
-        argumentDocs:
-            auto_linking: '(String) Enable if users should get prompted to link an existing ZITADEL user to an external account if the selected attribute matches, supported values: AUTO_LINKING_OPTION_UNSPECIFIED, AUTO_LINKING_OPTION_USERNAME, AUTO_LINKING_OPTION_EMAIL'
-            client_id: (String) client id generated by the identity provider
-            client_secret: (String, Sensitive) client secret generated by the identity provider
-            id: (String) The ID of this resource.
-            is_auto_creation: (Boolean) enabled if a new account in ZITADEL are created automatically on login with an external account
-            is_auto_update: (Boolean) enabled if a the ZITADEL account fields are updated automatically on each login
-            is_creation_allowed: (Boolean) enabled if users are able to create a new account in ZITADEL when using an external account
-            is_id_token_mapping: (Boolean) if true, provider information get mapped from the id token, not from the userinfo endpoint.
-            is_linking_allowed: (Boolean) enabled if users are able to link an existing ZITADEL user with an external account
-            issuer: (String) the issuer of the idp
-            name: (String) Name of the IDP
-            org_id: (String) ID of the organization
-            scopes: (Set of String) the scopes requested by ZITADEL during the request on the identity provider
-        importStatements: []
-    zitadel_orgs Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
-        name: zitadel_orgs Data Source - terraform-provider-zitadel
-        title: zitadel_orgs Data Source - terraform-provider-zitadel
-        argumentDocs:
-            domain: (String) A domain of the org.
-            domain_method: '(String) Method for querying orgs by domain, supported values: TEXT_QUERY_METHOD_EQUALS, TEXT_QUERY_METHOD_EQUALS_IGNORE_CASE, TEXT_QUERY_METHOD_STARTS_WITH, TEXT_QUERY_METHOD_STARTS_WITH_IGNORE_CASE, TEXT_QUERY_METHOD_CONTAINS, TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE, TEXT_QUERY_METHOD_ENDS_WITH, TEXT_QUERY_METHOD_ENDS_WITH_IGNORE_CASE'
-            id: (String) The ID of this resource.
-            ids: (List of String) A set of all organization IDs.
-            name: (String) Name of the org.
-            name_method: '(String) Method for querying orgs by name, supported values: TEXT_QUERY_METHOD_EQUALS, TEXT_QUERY_METHOD_EQUALS_IGNORE_CASE, TEXT_QUERY_METHOD_STARTS_WITH, TEXT_QUERY_METHOD_STARTS_WITH_IGNORE_CASE, TEXT_QUERY_METHOD_CONTAINS, TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE, TEXT_QUERY_METHOD_ENDS_WITH, TEXT_QUERY_METHOD_ENDS_WITH_IGNORE_CASE'
-            primary_domain: (String) Primary domain of the org
-            state: '(String) State of the org, supported values: ORG_STATE_UNSPECIFIED, ORG_STATE_ACTIVE, ORG_STATE_INACTIVE, ORG_STATE_REMOVED'
         importStatements: []
     zitadel_password_change_message_text:
         subCategory: ""
@@ -3599,22 +2973,6 @@ resources:
             project_role_check: (Boolean) ZITADEL checks if the user has at least one on this project
             state: (String) State of the project
         importStatements: []
-    zitadel_project Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing the project, which can then be granted to different organizations or users directly, containing different applications.
-        name: zitadel_project Data Source - terraform-provider-zitadel
-        title: zitadel_project Data Source - terraform-provider-zitadel
-        argumentDocs:
-            has_project_check: (Boolean) ZITADEL checks if the org of the user has permission to this project
-            id: (String) The ID of this resource.
-            name: (String) Name of the project
-            org_id: (String) ID of the organization
-            private_labeling_setting: (String) Defines from where the private labeling should be triggered
-            project_id: (String) The ID of this resource.
-            project_role_assertion: (Boolean) describes if roles of user should be added in token
-            project_role_check: (Boolean) ZITADEL checks if the user has at least one on this project
-            state: (String) State of the project
-        importStatements: []
     zitadel_project_grant:
         subCategory: ""
         description: Resource representing the grant of a project to a different organization, also containing the available roles which can be given to the members of the projectgrant.
@@ -3724,31 +3082,6 @@ resources:
             project_id: (String) ID of the project
             role_key: (String) Key used for project role
         importStatements: []
-    zitadel_project_role Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing the project roles, which can be given as authorizations to users.
-        name: zitadel_project_role Data Source - terraform-provider-zitadel
-        title: zitadel_project_role Data Source - terraform-provider-zitadel
-        argumentDocs:
-            display_name: (String) Name used for project role
-            group: (String) Group used for project role
-            id: (String) The ID of this resource.
-            org_id: (String) ID of the organization
-            project_id: (String) ID of the project
-            role_key: (String) Key used for project role
-        importStatements: []
-    zitadel_projects Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Datasource representing the project, which can then be granted to different organizations or users directly, containing different applications.
-        name: zitadel_projects Data Source - terraform-provider-zitadel
-        title: zitadel_projects Data Source - terraform-provider-zitadel
-        argumentDocs:
-            id: (String) The ID of this resource.
-            name: (String) Name of the project
-            name_method: '(String) Method for querying projects by name, supported values: TEXT_QUERY_METHOD_EQUALS, TEXT_QUERY_METHOD_EQUALS_IGNORE_CASE, TEXT_QUERY_METHOD_STARTS_WITH, TEXT_QUERY_METHOD_STARTS_WITH_IGNORE_CASE, TEXT_QUERY_METHOD_CONTAINS, TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE, TEXT_QUERY_METHOD_ENDS_WITH, TEXT_QUERY_METHOD_ENDS_WITH_IGNORE_CASE'
-            org_id: (String) ID of the organization
-            project_ids: (List of String) A set of all project IDs.
-        importStatements: []
     zitadel_sms_provider_twilio:
         subCategory: ""
         description: Resource representing the SMS provider Twilio configuration of an instance.
@@ -3820,18 +3153,6 @@ resources:
             id: (String) The ID of this resource.
             org_id: (String) ID of the organization
             trigger_type: '(String) Trigger type on when the actions get triggered, supported values: TRIGGER_TYPE_POST_AUTHENTICATION, TRIGGER_TYPE_PRE_CREATION, TRIGGER_TYPE_POST_CREATION, TRIGGER_TYPE_PRE_USERINFO_CREATION, TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION, TRIGGER_TYPE_PRE_SAML_RESPONSE_CREATION'
-        importStatements: []
-    zitadel_trigger_actions Data Source - terraform-provider-zitadel:
-        subCategory: ""
-        description: Resource representing triggers, when actions get started
-        name: zitadel_trigger_actions Data Source - terraform-provider-zitadel
-        title: zitadel_trigger_actions Data Source - terraform-provider-zitadel
-        argumentDocs:
-            action_ids: (Set of String) IDs of the triggered actions
-            flow_type: (String) Type of the flow to which the action triggers belong
-            id: (String) The ID of this resource.
-            org_id: (String) ID of the organization
-            trigger_type: (String) Trigger type on when the actions get triggered
         importStatements: []
     zitadel_user_grant:
         subCategory: ""

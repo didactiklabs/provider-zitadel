@@ -10,6 +10,7 @@ import (
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 
 	"github.com/didactiklabs/provider-zitadel/config/idp_github"
+	"github.com/didactiklabs/provider-zitadel/config/org_idp_github"
 )
 
 const (
@@ -35,6 +36,7 @@ func GetProvider() *ujconfig.Provider {
 
 	for _, configure := range []func(provider *ujconfig.Provider){
 		idp_github.Configure,
+		org_idp_github.Configure,
 	} {
 		configure(pc)
 	}
