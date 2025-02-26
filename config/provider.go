@@ -13,6 +13,7 @@ import (
 	"github.com/didactiklabs/provider-zitadel/config/idpgithub"
 	"github.com/didactiklabs/provider-zitadel/config/org"
 	"github.com/didactiklabs/provider-zitadel/config/orgidpgithub"
+	"github.com/didactiklabs/provider-zitadel/config/project"
 )
 
 const (
@@ -40,6 +41,7 @@ func GetProvider() *ujconfig.Provider {
 		idpgithub.Configure,
 		orgidpgithub.Configure,
 		org.Configure,
+		project.Configure,
 		applicationoidc.Configure,
 	} {
 		configure(pc)

@@ -14,6 +14,7 @@ import (
 	orggithub "github.com/didactiklabs/provider-zitadel/internal/controller/idp/orggithub"
 	providerconfig "github.com/didactiklabs/provider-zitadel/internal/controller/providerconfig"
 	org "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/org"
+	project "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/project"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -25,6 +26,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		orggithub.Setup,
 		providerconfig.Setup,
 		org.Setup,
+		project.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

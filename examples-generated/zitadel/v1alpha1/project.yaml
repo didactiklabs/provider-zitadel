@@ -1,0 +1,18 @@
+apiVersion: zitadel.didactiklabs.io/v1alpha1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: zitadel/v1alpha1/project
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    hasProjectCheck: true
+    name: projectname
+    orgIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: zitadel_org
+    privateLabelingSetting: PRIVATE_LABELING_SETTING_ENFORCE_PROJECT_RESOURCE_OWNER_POLICY
+    projectRoleAssertion: true
+    projectRoleCheck: true

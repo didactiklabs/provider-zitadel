@@ -8,5 +8,11 @@ func Configure(p *config.Provider) {
 		// We need to override the default group that upjet generated for
 		// this resource, which would be "github"
 		r.ShortGroup = "application.zitadel"
+		r.References["project_id"] = config.Reference{
+			TerraformName: "zitadel_project",
+		}
+		r.References["org_id"] = config.Reference{
+			TerraformName: "zitadel_org",
+		}
 	})
 }

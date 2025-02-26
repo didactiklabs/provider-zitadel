@@ -20,10 +20,14 @@ spec:
     idTokenRoleAssertion: false
     idTokenUserinfoAssertion: false
     name: applicationoidc
-    orgId: ${data.zitadel_org.default.id}
+    orgIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: zitadel_org
     postLogoutRedirectUris:
     - https://localhost.com
-    projectId: ${data.zitadel_project.default.id}
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: zitadel_project
     redirectUris:
     - https://localhost.com
     responseTypes:

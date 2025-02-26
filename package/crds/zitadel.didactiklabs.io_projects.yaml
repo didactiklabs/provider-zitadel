@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: oidcs.application.zitadel.didactiklabs.io
+  name: projects.zitadel.didactiklabs.io
 spec:
-  group: application.zitadel.didactiklabs.io
+  group: zitadel.didactiklabs.io
   names:
     categories:
     - crossplane
     - managed
     - zitadel
-    kind: Oidc
-    listKind: OidcList
-    plural: oidcs
-    singular: oidc
+    kind: Project
+    listKind: ProjectList
+    plural: projects
+    singular: project
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,9 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Oidc is the Schema for the Oidcs API. Resource representing an
-          OIDC application belonging to a project, with all configuration possibilities.
+        description: Project is the Schema for the Projects API. Resource representing
+          the project, which can then be granted to different organizations or users
+          directly, containing different applications.
         properties:
           apiVersion:
             description: |-
@@ -55,7 +56,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: OidcSpec defines the desired state of Oidc
+            description: ProjectSpec defines the desired state of Project
             properties:
               deletionPolicy:
                 default: Delete
@@ -73,64 +74,15 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  accessTokenRoleAssertion:
+                  hasProjectCheck:
                     description: |-
-                      (Boolean) Access token role assertion
-                      Access token role assertion
-                    type: boolean
-                  accessTokenType:
-                    description: |-
-                      (String) Access token type, supported values: OIDC_TOKEN_TYPE_BEARER, OIDC_TOKEN_TYPE_JWT
-                      Access token type, supported values: OIDC_TOKEN_TYPE_BEARER, OIDC_TOKEN_TYPE_JWT
-                    type: string
-                  additionalOrigins:
-                    description: |-
-                      (List of String) Additional origins
-                      Additional origins
-                    items:
-                      type: string
-                    type: array
-                  appType:
-                    description: |-
-                      (String) App type, supported values: OIDC_APP_TYPE_WEB, OIDC_APP_TYPE_USER_AGENT, OIDC_APP_TYPE_NATIVE
-                      App type, supported values: OIDC_APP_TYPE_WEB, OIDC_APP_TYPE_USER_AGENT, OIDC_APP_TYPE_NATIVE
-                    type: string
-                  authMethodType:
-                    description: |-
-                      (String) Auth method type, supported values: OIDC_AUTH_METHOD_TYPE_BASIC, OIDC_AUTH_METHOD_TYPE_POST, OIDC_AUTH_METHOD_TYPE_NONE, OIDC_AUTH_METHOD_TYPE_PRIVATE_KEY_JWT
-                      Auth method type, supported values: OIDC_AUTH_METHOD_TYPE_BASIC, OIDC_AUTH_METHOD_TYPE_POST, OIDC_AUTH_METHOD_TYPE_NONE, OIDC_AUTH_METHOD_TYPE_PRIVATE_KEY_JWT
-                    type: string
-                  clockSkew:
-                    description: |-
-                      (String) Clockskew
-                      Clockskew
-                    type: string
-                  devMode:
-                    description: |-
-                      (Boolean) Dev mode
-                      Dev mode
-                    type: boolean
-                  grantTypes:
-                    description: |-
-                      (List of String) Grant types, supported values: OIDC_GRANT_TYPE_AUTHORIZATION_CODE, OIDC_GRANT_TYPE_IMPLICIT, OIDC_GRANT_TYPE_REFRESH_TOKEN, OIDC_GRANT_TYPE_DEVICE_CODE, OIDC_GRANT_TYPE_TOKEN_EXCHANGE
-                      Grant types, supported values: OIDC_GRANT_TYPE_AUTHORIZATION_CODE, OIDC_GRANT_TYPE_IMPLICIT, OIDC_GRANT_TYPE_REFRESH_TOKEN, OIDC_GRANT_TYPE_DEVICE_CODE, OIDC_GRANT_TYPE_TOKEN_EXCHANGE
-                    items:
-                      type: string
-                    type: array
-                  idTokenRoleAssertion:
-                    description: |-
-                      (Boolean) ID token role assertion
-                      ID token role assertion
-                    type: boolean
-                  idTokenUserinfoAssertion:
-                    description: |-
-                      (Boolean) Token userinfo assertion
-                      Token userinfo assertion
+                      (Boolean) ZITADEL checks if the org of the user has permission to this project
+                      ZITADEL checks if the org of the user has permission to this project
                     type: boolean
                   name:
                     description: |-
-                      (String) Name of the application
-                      Name of the application
+                      (String) Name of the project
+                      Name of the project
                     type: string
                   orgId:
                     description: |-
@@ -211,116 +163,21 @@ spec:
                             type: string
                         type: object
                     type: object
-                  postLogoutRedirectUris:
+                  privateLabelingSetting:
                     description: |-
-                      (List of String) Post logout redirect URIs
-                      Post logout redirect URIs
-                    items:
-                      type: string
-                    type: array
-                  projectId:
-                    description: |-
-                      (String) ID of the project
-                      ID of the project
+                      (String) Defines from where the private labeling should be triggered, supported values: PRIVATE_LABELING_SETTING_UNSPECIFIED, PRIVATE_LABELING_SETTING_ENFORCE_PROJECT_RESOURCE_OWNER_POLICY, PRIVATE_LABELING_SETTING_ALLOW_LOGIN_USER_RESOURCE_OWNER_POLICY
+                      Defines from where the private labeling should be triggered, supported values: PRIVATE_LABELING_SETTING_UNSPECIFIED, PRIVATE_LABELING_SETTING_ENFORCE_PROJECT_RESOURCE_OWNER_POLICY, PRIVATE_LABELING_SETTING_ALLOW_LOGIN_USER_RESOURCE_OWNER_POLICY
                     type: string
-                  projectIdRef:
-                    description: Reference to a Project in zitadel to populate projectId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  projectIdSelector:
-                    description: Selector for a Project in zitadel to populate projectId.
-                    properties:
-                      matchControllerRef:
-                        description: |-
-                          MatchControllerRef ensures an object with the same controller reference
-                          as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  redirectUris:
+                  projectRoleAssertion:
                     description: |-
-                      (List of String) RedirectURIs
-                      RedirectURIs
-                    items:
-                      type: string
-                    type: array
-                  responseTypes:
-                    description: |-
-                      (List of String) Response type, supported values: OIDC_RESPONSE_TYPE_CODE, OIDC_RESPONSE_TYPE_ID_TOKEN, OIDC_RESPONSE_TYPE_ID_TOKEN_TOKEN
-                      Response type, supported values: OIDC_RESPONSE_TYPE_CODE, OIDC_RESPONSE_TYPE_ID_TOKEN, OIDC_RESPONSE_TYPE_ID_TOKEN_TOKEN
-                    items:
-                      type: string
-                    type: array
-                  skipNativeAppSuccessPage:
-                    description: |-
-                      (Boolean) Skip the successful login page on native apps and directly redirect the user to the callback.
-                      Skip the successful login page on native apps and directly redirect the user to the callback.
+                      (Boolean) describes if roles of user should be added in token
+                      describes if roles of user should be added in token
                     type: boolean
-                  version:
+                  projectRoleCheck:
                     description: |-
-                      (String) Version, supported values: OIDC_VERSION_1_0
-                      Version, supported values: OIDC_VERSION_1_0
-                    type: string
+                      (Boolean) ZITADEL checks if the user has at least one on this project
+                      ZITADEL checks if the user has at least one on this project
+                    type: boolean
                 type: object
               initProvider:
                 description: |-
@@ -335,64 +192,15 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  accessTokenRoleAssertion:
+                  hasProjectCheck:
                     description: |-
-                      (Boolean) Access token role assertion
-                      Access token role assertion
-                    type: boolean
-                  accessTokenType:
-                    description: |-
-                      (String) Access token type, supported values: OIDC_TOKEN_TYPE_BEARER, OIDC_TOKEN_TYPE_JWT
-                      Access token type, supported values: OIDC_TOKEN_TYPE_BEARER, OIDC_TOKEN_TYPE_JWT
-                    type: string
-                  additionalOrigins:
-                    description: |-
-                      (List of String) Additional origins
-                      Additional origins
-                    items:
-                      type: string
-                    type: array
-                  appType:
-                    description: |-
-                      (String) App type, supported values: OIDC_APP_TYPE_WEB, OIDC_APP_TYPE_USER_AGENT, OIDC_APP_TYPE_NATIVE
-                      App type, supported values: OIDC_APP_TYPE_WEB, OIDC_APP_TYPE_USER_AGENT, OIDC_APP_TYPE_NATIVE
-                    type: string
-                  authMethodType:
-                    description: |-
-                      (String) Auth method type, supported values: OIDC_AUTH_METHOD_TYPE_BASIC, OIDC_AUTH_METHOD_TYPE_POST, OIDC_AUTH_METHOD_TYPE_NONE, OIDC_AUTH_METHOD_TYPE_PRIVATE_KEY_JWT
-                      Auth method type, supported values: OIDC_AUTH_METHOD_TYPE_BASIC, OIDC_AUTH_METHOD_TYPE_POST, OIDC_AUTH_METHOD_TYPE_NONE, OIDC_AUTH_METHOD_TYPE_PRIVATE_KEY_JWT
-                    type: string
-                  clockSkew:
-                    description: |-
-                      (String) Clockskew
-                      Clockskew
-                    type: string
-                  devMode:
-                    description: |-
-                      (Boolean) Dev mode
-                      Dev mode
-                    type: boolean
-                  grantTypes:
-                    description: |-
-                      (List of String) Grant types, supported values: OIDC_GRANT_TYPE_AUTHORIZATION_CODE, OIDC_GRANT_TYPE_IMPLICIT, OIDC_GRANT_TYPE_REFRESH_TOKEN, OIDC_GRANT_TYPE_DEVICE_CODE, OIDC_GRANT_TYPE_TOKEN_EXCHANGE
-                      Grant types, supported values: OIDC_GRANT_TYPE_AUTHORIZATION_CODE, OIDC_GRANT_TYPE_IMPLICIT, OIDC_GRANT_TYPE_REFRESH_TOKEN, OIDC_GRANT_TYPE_DEVICE_CODE, OIDC_GRANT_TYPE_TOKEN_EXCHANGE
-                    items:
-                      type: string
-                    type: array
-                  idTokenRoleAssertion:
-                    description: |-
-                      (Boolean) ID token role assertion
-                      ID token role assertion
-                    type: boolean
-                  idTokenUserinfoAssertion:
-                    description: |-
-                      (Boolean) Token userinfo assertion
-                      Token userinfo assertion
+                      (Boolean) ZITADEL checks if the org of the user has permission to this project
+                      ZITADEL checks if the org of the user has permission to this project
                     type: boolean
                   name:
                     description: |-
-                      (String) Name of the application
-                      Name of the application
+                      (String) Name of the project
+                      Name of the project
                     type: string
                   orgId:
                     description: |-
@@ -473,116 +281,21 @@ spec:
                             type: string
                         type: object
                     type: object
-                  postLogoutRedirectUris:
+                  privateLabelingSetting:
                     description: |-
-                      (List of String) Post logout redirect URIs
-                      Post logout redirect URIs
-                    items:
-                      type: string
-                    type: array
-                  projectId:
-                    description: |-
-                      (String) ID of the project
-                      ID of the project
+                      (String) Defines from where the private labeling should be triggered, supported values: PRIVATE_LABELING_SETTING_UNSPECIFIED, PRIVATE_LABELING_SETTING_ENFORCE_PROJECT_RESOURCE_OWNER_POLICY, PRIVATE_LABELING_SETTING_ALLOW_LOGIN_USER_RESOURCE_OWNER_POLICY
+                      Defines from where the private labeling should be triggered, supported values: PRIVATE_LABELING_SETTING_UNSPECIFIED, PRIVATE_LABELING_SETTING_ENFORCE_PROJECT_RESOURCE_OWNER_POLICY, PRIVATE_LABELING_SETTING_ALLOW_LOGIN_USER_RESOURCE_OWNER_POLICY
                     type: string
-                  projectIdRef:
-                    description: Reference to a Project in zitadel to populate projectId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  projectIdSelector:
-                    description: Selector for a Project in zitadel to populate projectId.
-                    properties:
-                      matchControllerRef:
-                        description: |-
-                          MatchControllerRef ensures an object with the same controller reference
-                          as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  redirectUris:
+                  projectRoleAssertion:
                     description: |-
-                      (List of String) RedirectURIs
-                      RedirectURIs
-                    items:
-                      type: string
-                    type: array
-                  responseTypes:
-                    description: |-
-                      (List of String) Response type, supported values: OIDC_RESPONSE_TYPE_CODE, OIDC_RESPONSE_TYPE_ID_TOKEN, OIDC_RESPONSE_TYPE_ID_TOKEN_TOKEN
-                      Response type, supported values: OIDC_RESPONSE_TYPE_CODE, OIDC_RESPONSE_TYPE_ID_TOKEN, OIDC_RESPONSE_TYPE_ID_TOKEN_TOKEN
-                    items:
-                      type: string
-                    type: array
-                  skipNativeAppSuccessPage:
-                    description: |-
-                      (Boolean) Skip the successful login page on native apps and directly redirect the user to the callback.
-                      Skip the successful login page on native apps and directly redirect the user to the callback.
+                      (Boolean) describes if roles of user should be added in token
+                      describes if roles of user should be added in token
                     type: boolean
-                  version:
+                  projectRoleCheck:
                     description: |-
-                      (String) Version, supported values: OIDC_VERSION_1_0
-                      Version, supported values: OIDC_VERSION_1_0
-                    type: string
+                      (Boolean) ZITADEL checks if the user has at least one on this project
+                      ZITADEL checks if the user has at least one on this project
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -752,129 +465,52 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.grantTypes is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.grantTypes)
-                || (has(self.initProvider) && has(self.initProvider.grantTypes))'
             - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.redirectUris is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.redirectUris)
-                || (has(self.initProvider) && has(self.initProvider.redirectUris))'
-            - message: spec.forProvider.responseTypes is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.responseTypes)
-                || (has(self.initProvider) && has(self.initProvider.responseTypes))'
           status:
-            description: OidcStatus defines the observed state of Oidc.
+            description: ProjectStatus defines the observed state of Project.
             properties:
               atProvider:
                 properties:
-                  accessTokenRoleAssertion:
+                  hasProjectCheck:
                     description: |-
-                      (Boolean) Access token role assertion
-                      Access token role assertion
+                      (Boolean) ZITADEL checks if the org of the user has permission to this project
+                      ZITADEL checks if the org of the user has permission to this project
                     type: boolean
-                  accessTokenType:
-                    description: |-
-                      (String) Access token type, supported values: OIDC_TOKEN_TYPE_BEARER, OIDC_TOKEN_TYPE_JWT
-                      Access token type, supported values: OIDC_TOKEN_TYPE_BEARER, OIDC_TOKEN_TYPE_JWT
-                    type: string
-                  additionalOrigins:
-                    description: |-
-                      (List of String) Additional origins
-                      Additional origins
-                    items:
-                      type: string
-                    type: array
-                  appType:
-                    description: |-
-                      (String) App type, supported values: OIDC_APP_TYPE_WEB, OIDC_APP_TYPE_USER_AGENT, OIDC_APP_TYPE_NATIVE
-                      App type, supported values: OIDC_APP_TYPE_WEB, OIDC_APP_TYPE_USER_AGENT, OIDC_APP_TYPE_NATIVE
-                    type: string
-                  authMethodType:
-                    description: |-
-                      (String) Auth method type, supported values: OIDC_AUTH_METHOD_TYPE_BASIC, OIDC_AUTH_METHOD_TYPE_POST, OIDC_AUTH_METHOD_TYPE_NONE, OIDC_AUTH_METHOD_TYPE_PRIVATE_KEY_JWT
-                      Auth method type, supported values: OIDC_AUTH_METHOD_TYPE_BASIC, OIDC_AUTH_METHOD_TYPE_POST, OIDC_AUTH_METHOD_TYPE_NONE, OIDC_AUTH_METHOD_TYPE_PRIVATE_KEY_JWT
-                    type: string
-                  clockSkew:
-                    description: |-
-                      (String) Clockskew
-                      Clockskew
-                    type: string
-                  devMode:
-                    description: |-
-                      (Boolean) Dev mode
-                      Dev mode
-                    type: boolean
-                  grantTypes:
-                    description: |-
-                      (List of String) Grant types, supported values: OIDC_GRANT_TYPE_AUTHORIZATION_CODE, OIDC_GRANT_TYPE_IMPLICIT, OIDC_GRANT_TYPE_REFRESH_TOKEN, OIDC_GRANT_TYPE_DEVICE_CODE, OIDC_GRANT_TYPE_TOKEN_EXCHANGE
-                      Grant types, supported values: OIDC_GRANT_TYPE_AUTHORIZATION_CODE, OIDC_GRANT_TYPE_IMPLICIT, OIDC_GRANT_TYPE_REFRESH_TOKEN, OIDC_GRANT_TYPE_DEVICE_CODE, OIDC_GRANT_TYPE_TOKEN_EXCHANGE
-                    items:
-                      type: string
-                    type: array
                   id:
                     description: (String) The ID of this resource.
                     type: string
-                  idTokenRoleAssertion:
-                    description: |-
-                      (Boolean) ID token role assertion
-                      ID token role assertion
-                    type: boolean
-                  idTokenUserinfoAssertion:
-                    description: |-
-                      (Boolean) Token userinfo assertion
-                      Token userinfo assertion
-                    type: boolean
                   name:
                     description: |-
-                      (String) Name of the application
-                      Name of the application
+                      (String) Name of the project
+                      Name of the project
                     type: string
                   orgId:
                     description: |-
                       (String) ID of the organization
                       ID of the organization
                     type: string
-                  postLogoutRedirectUris:
+                  privateLabelingSetting:
                     description: |-
-                      (List of String) Post logout redirect URIs
-                      Post logout redirect URIs
-                    items:
-                      type: string
-                    type: array
-                  projectId:
-                    description: |-
-                      (String) ID of the project
-                      ID of the project
+                      (String) Defines from where the private labeling should be triggered, supported values: PRIVATE_LABELING_SETTING_UNSPECIFIED, PRIVATE_LABELING_SETTING_ENFORCE_PROJECT_RESOURCE_OWNER_POLICY, PRIVATE_LABELING_SETTING_ALLOW_LOGIN_USER_RESOURCE_OWNER_POLICY
+                      Defines from where the private labeling should be triggered, supported values: PRIVATE_LABELING_SETTING_UNSPECIFIED, PRIVATE_LABELING_SETTING_ENFORCE_PROJECT_RESOURCE_OWNER_POLICY, PRIVATE_LABELING_SETTING_ALLOW_LOGIN_USER_RESOURCE_OWNER_POLICY
                     type: string
-                  redirectUris:
+                  projectRoleAssertion:
                     description: |-
-                      (List of String) RedirectURIs
-                      RedirectURIs
-                    items:
-                      type: string
-                    type: array
-                  responseTypes:
-                    description: |-
-                      (List of String) Response type, supported values: OIDC_RESPONSE_TYPE_CODE, OIDC_RESPONSE_TYPE_ID_TOKEN, OIDC_RESPONSE_TYPE_ID_TOKEN_TOKEN
-                      Response type, supported values: OIDC_RESPONSE_TYPE_CODE, OIDC_RESPONSE_TYPE_ID_TOKEN, OIDC_RESPONSE_TYPE_ID_TOKEN_TOKEN
-                    items:
-                      type: string
-                    type: array
-                  skipNativeAppSuccessPage:
-                    description: |-
-                      (Boolean) Skip the successful login page on native apps and directly redirect the user to the callback.
-                      Skip the successful login page on native apps and directly redirect the user to the callback.
+                      (Boolean) describes if roles of user should be added in token
+                      describes if roles of user should be added in token
                     type: boolean
-                  version:
+                  projectRoleCheck:
                     description: |-
-                      (String) Version, supported values: OIDC_VERSION_1_0
-                      Version, supported values: OIDC_VERSION_1_0
+                      (Boolean) ZITADEL checks if the user has at least one on this project
+                      ZITADEL checks if the user has at least one on this project
+                    type: boolean
+                  state:
+                    description: |-
+                      (String) State of the project
+                      State of the project
                     type: string
                 type: object
               conditions:
