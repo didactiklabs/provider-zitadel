@@ -12,6 +12,8 @@ import (
 
 	v1alpha1 "github.com/didactiklabs/provider-zitadel/apis/application/v1alpha1"
 	v1alpha1idp "github.com/didactiklabs/provider-zitadel/apis/idp/v1alpha1"
+	v1alpha1login "github.com/didactiklabs/provider-zitadel/apis/login/v1alpha1"
+	v1alpha1project "github.com/didactiklabs/provider-zitadel/apis/project/v1alpha1"
 	v1alpha1apis "github.com/didactiklabs/provider-zitadel/apis/v1alpha1"
 	v1beta1 "github.com/didactiklabs/provider-zitadel/apis/v1beta1"
 	v1alpha1zitadel "github.com/didactiklabs/provider-zitadel/apis/zitadel/v1alpha1"
@@ -22,6 +24,8 @@ func init() {
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1alpha1idp.SchemeBuilder.AddToScheme,
+		v1alpha1login.SchemeBuilder.AddToScheme,
+		v1alpha1project.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,
 		v1alpha1zitadel.SchemeBuilder.AddToScheme,

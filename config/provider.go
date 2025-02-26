@@ -11,9 +11,11 @@ import (
 
 	"github.com/didactiklabs/provider-zitadel/config/applicationoidc"
 	"github.com/didactiklabs/provider-zitadel/config/idpgithub"
+	"github.com/didactiklabs/provider-zitadel/config/loginpolicy"
 	"github.com/didactiklabs/provider-zitadel/config/org"
 	"github.com/didactiklabs/provider-zitadel/config/orgidpgithub"
 	"github.com/didactiklabs/provider-zitadel/config/project"
+	"github.com/didactiklabs/provider-zitadel/config/projectrole"
 )
 
 const (
@@ -42,7 +44,9 @@ func GetProvider() *ujconfig.Provider {
 		orgidpgithub.Configure,
 		org.Configure,
 		project.Configure,
+		projectrole.Configure,
 		applicationoidc.Configure,
+		loginpolicy.Configure,
 	} {
 		configure(pc)
 	}

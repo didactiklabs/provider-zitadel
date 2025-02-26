@@ -1,0 +1,38 @@
+apiVersion: login.zitadel.didactiklabs.io/v1alpha1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: login/v1alpha1/policy
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    allowDomainDiscovery: true
+    allowExternalIdp: true
+    allowRegister: true
+    defaultRedirectUri: localhost:8080
+    disableLoginWithEmail: true
+    disableLoginWithPhone: true
+    externalLoginCheckLifetime: 240h0m0s
+    forceMfa: false
+    forceMfaLocalOnly: false
+    hidePasswordReset: "false"
+    idps:
+    - ${data.zitadel_idp_google.default.id}
+    - ${data.zitadel_idp_azure_ad.default.id}
+    ignoreUnknownUsernames: true
+    mfaInitSkipLifetime: 720h0m0s
+    multiFactorCheckLifetime: 24h0m0s
+    multiFactors:
+    - MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION
+    orgIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: zitadel_org
+    passwordCheckLifetime: 240h0m0s
+    passwordlessType: PASSWORDLESS_TYPE_ALLOWED
+    secondFactorCheckLifetime: 24h0m0s
+    secondFactors:
+    - SECOND_FACTOR_TYPE_OTP
+    - SECOND_FACTOR_TYPE_U2F
+    userLogin: true

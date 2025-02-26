@@ -12,6 +12,8 @@ import (
 	oidc "github.com/didactiklabs/provider-zitadel/internal/controller/application/oidc"
 	instancegithub "github.com/didactiklabs/provider-zitadel/internal/controller/idp/instancegithub"
 	orggithub "github.com/didactiklabs/provider-zitadel/internal/controller/idp/orggithub"
+	policy "github.com/didactiklabs/provider-zitadel/internal/controller/login/policy"
+	role "github.com/didactiklabs/provider-zitadel/internal/controller/project/role"
 	providerconfig "github.com/didactiklabs/provider-zitadel/internal/controller/providerconfig"
 	org "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/org"
 	project "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/project"
@@ -24,6 +26,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		oidc.Setup,
 		instancegithub.Setup,
 		orggithub.Setup,
+		policy.Setup,
+		role.Setup,
 		providerconfig.Setup,
 		org.Setup,
 		project.Setup,

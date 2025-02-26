@@ -1,0 +1,19 @@
+apiVersion: project.zitadel.didactiklabs.io/v1alpha1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: project/v1alpha1/role
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    displayName: display_name2
+    group: role_group
+    orgIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: zitadel_org
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: zitadel_project
+    roleKey: super-user
