@@ -17,6 +17,7 @@ import (
 	role "github.com/didactiklabs/provider-zitadel/internal/controller/project/role"
 	providerconfig "github.com/didactiklabs/provider-zitadel/internal/controller/providerconfig"
 	action "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/action"
+	actions "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/actions"
 	org "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/org"
 	project "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/project"
 )
@@ -33,6 +34,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		role.Setup,
 		providerconfig.Setup,
 		action.Setup,
+		actions.Setup,
 		org.Setup,
 		project.Setup,
 	} {

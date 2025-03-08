@@ -12,10 +12,10 @@ spec:
     - crossplane
     - managed
     - zitadel
-    kind: Action
-    listKind: ActionList
+    kind: Actions
+    listKind: ActionsList
     plural: actions
-    singular: action
+    singular: actions
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Action is the Schema for the Actions API. Resource representing
-          an action belonging to an organization.
+        description: Actions is the Schema for the Actionss API. Resource representing
+          triggers, when actions get started
         properties:
           apiVersion:
             description: |-
@@ -55,7 +55,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ActionSpec defines the desired state of Action
+            description: ActionsSpec defines the desired state of Actions
             properties:
               deletionPolicy:
                 default: Delete
@@ -73,13 +73,18 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  allowedToFail:
+                  actionIds:
                     description: |-
-                      (Boolean) when true, the next action will be called even if this action fails
-                      when true, the next action will be called even if this action fails
-                    type: boolean
-                  name:
-                    description: (String)
+                      (Set of String) IDs of the triggered actions
+                      IDs of the triggered actions
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  flowType:
+                    description: |-
+                      (String) Type of the flow to which the action triggers belong, supported values: FLOW_TYPE_EXTERNAL_AUTHENTICATION, FLOW_TYPE_CUSTOMISE_TOKEN, FLOW_TYPE_INTERNAL_AUTHENTICATION, FLOW_TYPE_SAML_RESPONSE
+                      Type of the flow to which the action triggers belong, supported values: FLOW_TYPE_EXTERNAL_AUTHENTICATION, FLOW_TYPE_CUSTOMISE_TOKEN, FLOW_TYPE_INTERNAL_AUTHENTICATION, FLOW_TYPE_SAML_RESPONSE
                     type: string
                   orgId:
                     description: |-
@@ -160,13 +165,10 @@ spec:
                             type: string
                         type: object
                     type: object
-                  script:
-                    description: (String)
-                    type: string
-                  timeout:
+                  triggerType:
                     description: |-
-                      (String) after which time the action will be terminated if not finished
-                      after which time the action will be terminated if not finished
+                      (String) Trigger type on when the actions get triggered, supported values: TRIGGER_TYPE_POST_AUTHENTICATION, TRIGGER_TYPE_PRE_CREATION, TRIGGER_TYPE_POST_CREATION, TRIGGER_TYPE_PRE_USERINFO_CREATION, TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION, TRIGGER_TYPE_PRE_SAML_RESPONSE_CREATION
+                      Trigger type on when the actions get triggered, supported values: TRIGGER_TYPE_POST_AUTHENTICATION, TRIGGER_TYPE_PRE_CREATION, TRIGGER_TYPE_POST_CREATION, TRIGGER_TYPE_PRE_USERINFO_CREATION, TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION, TRIGGER_TYPE_PRE_SAML_RESPONSE_CREATION
                     type: string
                 type: object
               initProvider:
@@ -182,13 +184,18 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  allowedToFail:
+                  actionIds:
                     description: |-
-                      (Boolean) when true, the next action will be called even if this action fails
-                      when true, the next action will be called even if this action fails
-                    type: boolean
-                  name:
-                    description: (String)
+                      (Set of String) IDs of the triggered actions
+                      IDs of the triggered actions
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  flowType:
+                    description: |-
+                      (String) Type of the flow to which the action triggers belong, supported values: FLOW_TYPE_EXTERNAL_AUTHENTICATION, FLOW_TYPE_CUSTOMISE_TOKEN, FLOW_TYPE_INTERNAL_AUTHENTICATION, FLOW_TYPE_SAML_RESPONSE
+                      Type of the flow to which the action triggers belong, supported values: FLOW_TYPE_EXTERNAL_AUTHENTICATION, FLOW_TYPE_CUSTOMISE_TOKEN, FLOW_TYPE_INTERNAL_AUTHENTICATION, FLOW_TYPE_SAML_RESPONSE
                     type: string
                   orgId:
                     description: |-
@@ -269,13 +276,10 @@ spec:
                             type: string
                         type: object
                     type: object
-                  script:
-                    description: (String)
-                    type: string
-                  timeout:
+                  triggerType:
                     description: |-
-                      (String) after which time the action will be terminated if not finished
-                      after which time the action will be terminated if not finished
+                      (String) Trigger type on when the actions get triggered, supported values: TRIGGER_TYPE_POST_AUTHENTICATION, TRIGGER_TYPE_PRE_CREATION, TRIGGER_TYPE_POST_CREATION, TRIGGER_TYPE_PRE_USERINFO_CREATION, TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION, TRIGGER_TYPE_PRE_SAML_RESPONSE_CREATION
+                      Trigger type on when the actions get triggered, supported values: TRIGGER_TYPE_POST_AUTHENTICATION, TRIGGER_TYPE_PRE_CREATION, TRIGGER_TYPE_POST_CREATION, TRIGGER_TYPE_PRE_USERINFO_CREATION, TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION, TRIGGER_TYPE_PRE_SAML_RESPONSE_CREATION
                     type: string
                 type: object
               managementPolicies:
@@ -446,55 +450,48 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.allowedToFail is a required parameter
+            - message: spec.forProvider.actionIds is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.allowedToFail)
-                || (has(self.initProvider) && has(self.initProvider.allowedToFail))'
-            - message: spec.forProvider.name is a required parameter
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.actionIds)
+                || (has(self.initProvider) && has(self.initProvider.actionIds))'
+            - message: spec.forProvider.flowType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.script is a required parameter
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.flowType)
+                || (has(self.initProvider) && has(self.initProvider.flowType))'
+            - message: spec.forProvider.triggerType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.script)
-                || (has(self.initProvider) && has(self.initProvider.script))'
-            - message: spec.forProvider.timeout is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.timeout)
-                || (has(self.initProvider) && has(self.initProvider.timeout))'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.triggerType)
+                || (has(self.initProvider) && has(self.initProvider.triggerType))'
           status:
-            description: ActionStatus defines the observed state of Action.
+            description: ActionsStatus defines the observed state of Actions.
             properties:
               atProvider:
                 properties:
-                  allowedToFail:
+                  actionIds:
                     description: |-
-                      (Boolean) when true, the next action will be called even if this action fails
-                      when true, the next action will be called even if this action fails
-                    type: boolean
+                      (Set of String) IDs of the triggered actions
+                      IDs of the triggered actions
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  flowType:
+                    description: |-
+                      (String) Type of the flow to which the action triggers belong, supported values: FLOW_TYPE_EXTERNAL_AUTHENTICATION, FLOW_TYPE_CUSTOMISE_TOKEN, FLOW_TYPE_INTERNAL_AUTHENTICATION, FLOW_TYPE_SAML_RESPONSE
+                      Type of the flow to which the action triggers belong, supported values: FLOW_TYPE_EXTERNAL_AUTHENTICATION, FLOW_TYPE_CUSTOMISE_TOKEN, FLOW_TYPE_INTERNAL_AUTHENTICATION, FLOW_TYPE_SAML_RESPONSE
+                    type: string
                   id:
                     description: (String) The ID of this resource.
-                    type: string
-                  name:
-                    description: (String)
                     type: string
                   orgId:
                     description: |-
                       (String) ID of the organization
                       ID of the organization
                     type: string
-                  script:
-                    description: (String)
-                    type: string
-                  state:
+                  triggerType:
                     description: |-
-                      (Number) the state of the action
-                      the state of the action
-                    type: number
-                  timeout:
-                    description: |-
-                      (String) after which time the action will be terminated if not finished
-                      after which time the action will be terminated if not finished
+                      (String) Trigger type on when the actions get triggered, supported values: TRIGGER_TYPE_POST_AUTHENTICATION, TRIGGER_TYPE_PRE_CREATION, TRIGGER_TYPE_POST_CREATION, TRIGGER_TYPE_PRE_USERINFO_CREATION, TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION, TRIGGER_TYPE_PRE_SAML_RESPONSE_CREATION
+                      Trigger type on when the actions get triggered, supported values: TRIGGER_TYPE_POST_AUTHENTICATION, TRIGGER_TYPE_PRE_CREATION, TRIGGER_TYPE_POST_CREATION, TRIGGER_TYPE_PRE_USERINFO_CREATION, TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION, TRIGGER_TYPE_PRE_SAML_RESPONSE_CREATION
                     type: string
                 type: object
               conditions:

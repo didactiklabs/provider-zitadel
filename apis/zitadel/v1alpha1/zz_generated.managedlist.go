@@ -17,6 +17,15 @@ func (l *ActionList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ActionsList.
+func (l *ActionsList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this OrgList.
 func (l *OrgList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

@@ -10,6 +10,9 @@ package v1alpha1
 func (tr *Action) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Actions) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Org) Hub() {}
 
 // Hub marks this type as a conversion hub.
