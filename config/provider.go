@@ -15,6 +15,7 @@ import (
 	"github.com/didactiklabs/provider-zitadel/config/org"
 	"github.com/didactiklabs/provider-zitadel/config/orgidpgithub"
 	"github.com/didactiklabs/provider-zitadel/config/project"
+	"github.com/didactiklabs/provider-zitadel/config/projectgrant"
 	"github.com/didactiklabs/provider-zitadel/config/projectrole"
 )
 
@@ -45,6 +46,7 @@ func GetProvider() *ujconfig.Provider {
 		org.Configure,
 		project.Configure,
 		projectrole.Configure,
+		projectgrant.Configure,
 		applicationoidc.Configure,
 		loginpolicy.Configure,
 	} {

@@ -13,6 +13,7 @@ import (
 	instancegithub "github.com/didactiklabs/provider-zitadel/internal/controller/idp/instancegithub"
 	orggithub "github.com/didactiklabs/provider-zitadel/internal/controller/idp/orggithub"
 	policy "github.com/didactiklabs/provider-zitadel/internal/controller/login/policy"
+	grant "github.com/didactiklabs/provider-zitadel/internal/controller/project/grant"
 	role "github.com/didactiklabs/provider-zitadel/internal/controller/project/role"
 	providerconfig "github.com/didactiklabs/provider-zitadel/internal/controller/providerconfig"
 	org "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/org"
@@ -27,6 +28,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		instancegithub.Setup,
 		orggithub.Setup,
 		policy.Setup,
+		grant.Setup,
 		role.Setup,
 		providerconfig.Setup,
 		org.Setup,

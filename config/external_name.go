@@ -15,6 +15,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"zitadel_org":              config.IdentifierFromProvider,
 	"zitadel_project":          config.IdentifierFromProvider,
 	"zitadel_project_role":     config.IdentifierFromProvider,
+	"zitadel_project_grant":    config.IdentifierFromProvider,
 	"zitadel_application_oidc": config.IdentifierFromProvider,
 	"zitadel_login_policy":     config.IdentifierFromProvider,
 }

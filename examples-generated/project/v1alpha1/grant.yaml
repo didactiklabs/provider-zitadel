@@ -1,0 +1,19 @@
+apiVersion: project.zitadel.didactiklabs.io/v1alpha1
+kind: Grant
+metadata:
+  annotations:
+    meta.upbound.io/example-id: project/v1alpha1/grant
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    grantedOrgId: ${data.zitadel_org.granted_org.id}
+    orgIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: zitadel_org
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: zitadel_project
+    roleKeys:
+    - super-user
