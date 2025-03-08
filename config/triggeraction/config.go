@@ -12,8 +12,5 @@ func Configure(p *config.Provider) {
 		r.References["org_id"] = config.Reference{
 			TerraformName: "zitadel_org",
 		}
-		r.References["actions_ids"] = config.Reference{
-			TerraformName: "zitadel_action",
-		}
 	})
 }
