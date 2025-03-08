@@ -16,6 +16,7 @@ import (
 	grant "github.com/didactiklabs/provider-zitadel/internal/controller/project/grant"
 	role "github.com/didactiklabs/provider-zitadel/internal/controller/project/role"
 	providerconfig "github.com/didactiklabs/provider-zitadel/internal/controller/providerconfig"
+	action "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/action"
 	org "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/org"
 	project "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/project"
 )
@@ -31,6 +32,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		grant.Setup,
 		role.Setup,
 		providerconfig.Setup,
+		action.Setup,
 		org.Setup,
 		project.Setup,
 	} {

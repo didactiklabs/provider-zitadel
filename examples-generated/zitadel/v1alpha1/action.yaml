@@ -1,0 +1,17 @@
+apiVersion: zitadel.didactiklabs.io/v1alpha1
+kind: Action
+metadata:
+  annotations:
+    meta.upbound.io/example-id: zitadel/v1alpha1/action
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    allowedToFail: true
+    name: actionname
+    orgIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: zitadel_org
+    script: testscript
+    timeout: 10s
