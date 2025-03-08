@@ -19,6 +19,7 @@ import (
 	action "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/action"
 	org "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/org"
 	project "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/project"
+	triggeractions "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/triggeractions"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -35,6 +36,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		action.Setup,
 		org.Setup,
 		project.Setup,
+		triggeractions.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
