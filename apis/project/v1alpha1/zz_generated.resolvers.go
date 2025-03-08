@@ -22,6 +22,22 @@ func (mg *Grant) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GrantedOrgID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.GrantedOrgIDRef,
+		Selector:     mg.Spec.ForProvider.GrantedOrgIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.OrgList{},
+			Managed: &v1alpha1.Org{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.GrantedOrgID")
+	}
+	mg.Spec.ForProvider.GrantedOrgID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.GrantedOrgIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OrgID),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.OrgIDRef,
@@ -52,6 +68,22 @@ func (mg *Grant) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.ProjectID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ProjectIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GrantedOrgID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.GrantedOrgIDRef,
+		Selector:     mg.Spec.InitProvider.GrantedOrgIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.OrgList{},
+			Managed: &v1alpha1.Org{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.GrantedOrgID")
+	}
+	mg.Spec.InitProvider.GrantedOrgID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.GrantedOrgIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OrgID),

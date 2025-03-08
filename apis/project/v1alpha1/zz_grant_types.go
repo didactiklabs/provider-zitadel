@@ -17,7 +17,16 @@ type GrantInitParameters struct {
 
 	// (String) ID of the organization granted the project
 	// ID of the organization granted the project
+	// +crossplane:generate:reference:type=github.com/didactiklabs/provider-zitadel/apis/zitadel/v1alpha1.Org
 	GrantedOrgID *string `json:"grantedOrgId,omitempty" tf:"granted_org_id,omitempty"`
+
+	// Reference to a Org in zitadel to populate grantedOrgId.
+	// +kubebuilder:validation:Optional
+	GrantedOrgIDRef *v1.Reference `json:"grantedOrgIdRef,omitempty" tf:"-"`
+
+	// Selector for a Org in zitadel to populate grantedOrgId.
+	// +kubebuilder:validation:Optional
+	GrantedOrgIDSelector *v1.Selector `json:"grantedOrgIdSelector,omitempty" tf:"-"`
 
 	// (String) ID of the organization
 	// ID of the organization
@@ -78,8 +87,17 @@ type GrantParameters struct {
 
 	// (String) ID of the organization granted the project
 	// ID of the organization granted the project
+	// +crossplane:generate:reference:type=github.com/didactiklabs/provider-zitadel/apis/zitadel/v1alpha1.Org
 	// +kubebuilder:validation:Optional
 	GrantedOrgID *string `json:"grantedOrgId,omitempty" tf:"granted_org_id,omitempty"`
+
+	// Reference to a Org in zitadel to populate grantedOrgId.
+	// +kubebuilder:validation:Optional
+	GrantedOrgIDRef *v1.Reference `json:"grantedOrgIdRef,omitempty" tf:"-"`
+
+	// Selector for a Org in zitadel to populate grantedOrgId.
+	// +kubebuilder:validation:Optional
+	GrantedOrgIDSelector *v1.Selector `json:"grantedOrgIdSelector,omitempty" tf:"-"`
 
 	// (String) ID of the organization
 	// ID of the organization
@@ -152,9 +170,8 @@ type GrantStatus struct {
 type Grant struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.grantedOrgId) || (has(self.initProvider) && has(self.initProvider.grantedOrgId))",message="spec.forProvider.grantedOrgId is a required parameter"
-	Spec   GrantSpec   `json:"spec"`
-	Status GrantStatus `json:"status,omitempty"`
+	Spec              GrantSpec   `json:"spec"`
+	Status            GrantStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

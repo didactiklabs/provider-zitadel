@@ -48,6 +48,16 @@ func (in *GrantInitParameters) DeepCopyInto(out *GrantInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.GrantedOrgIDRef != nil {
+		in, out := &in.GrantedOrgIDRef, &out.GrantedOrgIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.GrantedOrgIDSelector != nil {
+		in, out := &in.GrantedOrgIDSelector, &out.GrantedOrgIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.OrgID != nil {
 		in, out := &in.OrgID, &out.OrgID
 		*out = new(string)
@@ -186,6 +196,16 @@ func (in *GrantParameters) DeepCopyInto(out *GrantParameters) {
 		in, out := &in.GrantedOrgID, &out.GrantedOrgID
 		*out = new(string)
 		**out = **in
+	}
+	if in.GrantedOrgIDRef != nil {
+		in, out := &in.GrantedOrgIDRef, &out.GrantedOrgIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.GrantedOrgIDSelector != nil {
+		in, out := &in.GrantedOrgIDSelector, &out.GrantedOrgIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.OrgID != nil {
 		in, out := &in.OrgID, &out.OrgID
