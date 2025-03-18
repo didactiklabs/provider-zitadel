@@ -1,0 +1,28 @@
+apiVersion: idp.zitadel.didactiklabs.io/v1alpha1
+kind: OrgGoogle
+metadata:
+  annotations:
+    meta.upbound.io/example-id: idp/v1alpha1/orggoogle
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    autoLinking: AUTO_LINKING_OPTION_USERNAME
+    clientId: 182902...
+    clientSecretSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    isAutoCreation: false
+    isAutoUpdate: true
+    isCreationAllowed: true
+    isLinkingAllowed: false
+    name: Google
+    orgIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: zitadel_org
+    scopes:
+    - openid
+    - profile
+    - email

@@ -10,4 +10,10 @@ package v1alpha1
 func (tr *InstanceGithub) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *InstanceGoogle) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *OrgGithub) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *OrgGoogle) Hub() {}

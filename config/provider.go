@@ -12,9 +12,11 @@ import (
 	"github.com/didactiklabs/provider-zitadel/config/action"
 	"github.com/didactiklabs/provider-zitadel/config/applicationoidc"
 	"github.com/didactiklabs/provider-zitadel/config/idpgithub"
+	"github.com/didactiklabs/provider-zitadel/config/idpgoogle"
 	"github.com/didactiklabs/provider-zitadel/config/loginpolicy"
 	"github.com/didactiklabs/provider-zitadel/config/org"
 	"github.com/didactiklabs/provider-zitadel/config/orgidpgithub"
+	"github.com/didactiklabs/provider-zitadel/config/orgidpgoogle"
 	"github.com/didactiklabs/provider-zitadel/config/project"
 	"github.com/didactiklabs/provider-zitadel/config/projectgrant"
 	"github.com/didactiklabs/provider-zitadel/config/projectrole"
@@ -45,7 +47,9 @@ func GetProvider() *ujconfig.Provider {
 
 	for _, configure := range []func(provider *ujconfig.Provider){
 		idpgithub.Configure,
+		idpgoogle.Configure,
 		orgidpgithub.Configure,
+		orgidpgoogle.Configure,
 		org.Configure,
 		action.Configure,
 		smtpconfig.Configure,

@@ -1,0 +1,25 @@
+apiVersion: idp.zitadel.didactiklabs.io/v1alpha1
+kind: InstanceGoogle
+metadata:
+  annotations:
+    meta.upbound.io/example-id: idp/v1alpha1/instancegoogle
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    autoLinking: AUTO_LINKING_OPTION_USERNAME
+    clientId: 182902...
+    clientSecretSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    isAutoCreation: false
+    isAutoUpdate: true
+    isCreationAllowed: true
+    isLinkingAllowed: false
+    name: Google
+    scopes:
+    - openid
+    - profile
+    - email

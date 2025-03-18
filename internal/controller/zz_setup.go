@@ -11,7 +11,9 @@ import (
 
 	oidc "github.com/didactiklabs/provider-zitadel/internal/controller/application/oidc"
 	instancegithub "github.com/didactiklabs/provider-zitadel/internal/controller/idp/instancegithub"
+	instancegoogle "github.com/didactiklabs/provider-zitadel/internal/controller/idp/instancegoogle"
 	orggithub "github.com/didactiklabs/provider-zitadel/internal/controller/idp/orggithub"
+	orggoogle "github.com/didactiklabs/provider-zitadel/internal/controller/idp/orggoogle"
 	policy "github.com/didactiklabs/provider-zitadel/internal/controller/login/policy"
 	grant "github.com/didactiklabs/provider-zitadel/internal/controller/project/grant"
 	role "github.com/didactiklabs/provider-zitadel/internal/controller/project/role"
@@ -29,7 +31,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		oidc.Setup,
 		instancegithub.Setup,
+		instancegoogle.Setup,
 		orggithub.Setup,
+		orggoogle.Setup,
 		policy.Setup,
 		grant.Setup,
 		role.Setup,

@@ -17,8 +17,26 @@ func (l *InstanceGithubList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this InstanceGoogleList.
+func (l *InstanceGoogleList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this OrgGithubList.
 func (l *OrgGithubList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this OrgGoogleList.
+func (l *OrgGoogleList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
