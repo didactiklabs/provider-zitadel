@@ -19,6 +19,7 @@ import (
 	action "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/action"
 	org "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/org"
 	project "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/project"
+	smtpconfig "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/smtpconfig"
 	triggeractions "github.com/didactiklabs/provider-zitadel/internal/controller/zitadel/triggeractions"
 )
 
@@ -36,6 +37,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		action.Setup,
 		org.Setup,
 		project.Setup,
+		smtpconfig.Setup,
 		triggeractions.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {

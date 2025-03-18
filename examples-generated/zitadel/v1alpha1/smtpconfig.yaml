@@ -1,0 +1,20 @@
+apiVersion: zitadel.didactiklabs.io/v1alpha1
+kind: SmtpConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: zitadel/v1alpha1/smtpconfig
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    host: localhost:25
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    replyToAddress: replyto@example.com
+    senderAddress: sender@example.com
+    senderName: no-reply
+    tls: true
+    user: user

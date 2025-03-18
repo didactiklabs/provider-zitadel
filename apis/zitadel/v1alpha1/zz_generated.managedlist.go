@@ -35,6 +35,15 @@ func (l *ProjectList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this SmtpConfigList.
+func (l *SmtpConfigList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this TriggerActionsList.
 func (l *TriggerActionsList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

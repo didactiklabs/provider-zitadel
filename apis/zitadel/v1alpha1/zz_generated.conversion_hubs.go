@@ -16,4 +16,7 @@ func (tr *Org) Hub() {}
 func (tr *Project) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *SmtpConfig) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *TriggerActions) Hub() {}
