@@ -69,6 +69,7 @@ func main() {
 		// logger when we're running in debug mode.
 		ctrl.SetLogger(zl)
 	}
+	ctrl.SetLogger(zap.New(zap.WriteTo(io.Discard)))
 
 	log.Debug("Starting", "sync-period", syncPeriod.String(), "poll-interval", pollInterval.String(), "max-reconcile-rate", *maxReconcileRate)
 
