@@ -28,8 +28,8 @@ type GrantInitParameters struct {
 	// +kubebuilder:validation:Optional
 	GrantedOrgIDSelector *v1.Selector `json:"grantedOrgIdSelector,omitempty" tf:"-"`
 
-	// (String) ID of the organization
-	// ID of the organization
+	// (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+	// ID of the organization. If not provided, the organization of the authenticated user/service account is used.
 	// +crossplane:generate:reference:type=github.com/didactiklabs/provider-zitadel/apis/zitadel/v1alpha1.Org
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 
@@ -69,8 +69,8 @@ type GrantObservation struct {
 	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// (String) ID of the organization
-	// ID of the organization
+	// (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+	// ID of the organization. If not provided, the organization of the authenticated user/service account is used.
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 
 	// (String) ID of the project
@@ -99,8 +99,8 @@ type GrantParameters struct {
 	// +kubebuilder:validation:Optional
 	GrantedOrgIDSelector *v1.Selector `json:"grantedOrgIdSelector,omitempty" tf:"-"`
 
-	// (String) ID of the organization
-	// ID of the organization
+	// (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+	// ID of the organization. If not provided, the organization of the authenticated user/service account is used.
 	// +crossplane:generate:reference:type=github.com/didactiklabs/provider-zitadel/apis/zitadel/v1alpha1.Org
 	// +kubebuilder:validation:Optional
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`

@@ -73,6 +73,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  description:
+                    description: |-
+                      (String) Description of the SMTP configuration.
+                      Description of the SMTP configuration.
+                    type: string
                   host:
                     description: |-
                       (String) Host and port address to your SMTP server.
@@ -114,8 +119,8 @@ spec:
                     type: string
                   setActive:
                     description: |-
-                      (Boolean) Set the SMTP configuration active after creating/updating
-                      Set the SMTP configuration active after creating/updating
+                      (Boolean) Set the SMTP configuration active after creating/updating.
+                      Set the SMTP configuration active after creating/updating.
                     type: boolean
                   tls:
                     description: |-
@@ -141,6 +146,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  description:
+                    description: |-
+                      (String) Description of the SMTP configuration.
+                      Description of the SMTP configuration.
+                    type: string
                   host:
                     description: |-
                       (String) Host and port address to your SMTP server.
@@ -182,8 +192,8 @@ spec:
                     type: string
                   setActive:
                     description: |-
-                      (Boolean) Set the SMTP configuration active after creating/updating
-                      Set the SMTP configuration active after creating/updating
+                      (Boolean) Set the SMTP configuration active after creating/updating.
+                      Set the SMTP configuration active after creating/updating.
                     type: boolean
                   tls:
                     description: |-
@@ -381,6 +391,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  description:
+                    description: |-
+                      (String) Description of the SMTP configuration.
+                      Description of the SMTP configuration.
+                    type: string
                   host:
                     description: |-
                       (String) Host and port address to your SMTP server.
@@ -406,8 +421,8 @@ spec:
                     type: string
                   setActive:
                     description: |-
-                      (Boolean) Set the SMTP configuration active after creating/updating
-                      Set the SMTP configuration active after creating/updating
+                      (Boolean) Set the SMTP configuration active after creating/updating.
+                      Set the SMTP configuration active after creating/updating.
                     type: boolean
                   tls:
                     description: |-

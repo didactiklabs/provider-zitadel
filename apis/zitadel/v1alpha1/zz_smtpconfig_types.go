@@ -15,6 +15,10 @@ import (
 
 type SmtpConfigInitParameters struct {
 
+	// (String) Description of the SMTP configuration.
+	// Description of the SMTP configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// (String) Host and port address to your SMTP server.
 	// Host and port address to your SMTP server.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
@@ -35,8 +39,8 @@ type SmtpConfigInitParameters struct {
 	// Sender name used to send emails.
 	SenderName *string `json:"senderName,omitempty" tf:"sender_name,omitempty"`
 
-	// (Boolean) Set the SMTP configuration active after creating/updating
-	// Set the SMTP configuration active after creating/updating
+	// (Boolean) Set the SMTP configuration active after creating/updating.
+	// Set the SMTP configuration active after creating/updating.
 	SetActive *bool `json:"setActive,omitempty" tf:"set_active,omitempty"`
 
 	// (Boolean) TLS used to communicate with your SMTP server.
@@ -49,6 +53,10 @@ type SmtpConfigInitParameters struct {
 }
 
 type SmtpConfigObservation struct {
+
+	// (String) Description of the SMTP configuration.
+	// Description of the SMTP configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// (String) Host and port address to your SMTP server.
 	// Host and port address to your SMTP server.
@@ -69,8 +77,8 @@ type SmtpConfigObservation struct {
 	// Sender name used to send emails.
 	SenderName *string `json:"senderName,omitempty" tf:"sender_name,omitempty"`
 
-	// (Boolean) Set the SMTP configuration active after creating/updating
-	// Set the SMTP configuration active after creating/updating
+	// (Boolean) Set the SMTP configuration active after creating/updating.
+	// Set the SMTP configuration active after creating/updating.
 	SetActive *bool `json:"setActive,omitempty" tf:"set_active,omitempty"`
 
 	// (Boolean) TLS used to communicate with your SMTP server.
@@ -83,6 +91,11 @@ type SmtpConfigObservation struct {
 }
 
 type SmtpConfigParameters struct {
+
+	// (String) Description of the SMTP configuration.
+	// Description of the SMTP configuration.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// (String) Host and port address to your SMTP server.
 	// Host and port address to your SMTP server.
@@ -109,8 +122,8 @@ type SmtpConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	SenderName *string `json:"senderName,omitempty" tf:"sender_name,omitempty"`
 
-	// (Boolean) Set the SMTP configuration active after creating/updating
-	// Set the SMTP configuration active after creating/updating
+	// (Boolean) Set the SMTP configuration active after creating/updating.
+	// Set the SMTP configuration active after creating/updating.
 	// +kubebuilder:validation:Optional
 	SetActive *bool `json:"setActive,omitempty" tf:"set_active,omitempty"`
 

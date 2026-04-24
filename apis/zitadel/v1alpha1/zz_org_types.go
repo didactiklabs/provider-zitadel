@@ -13,7 +13,46 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AdminsInitParameters struct {
+
+	// (List of String) Roles to assign (defaults to ORG_OWNER if empty)
+	// Roles to assign (defaults to ORG_OWNER if empty)
+	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
+
+	// (String) ID of existing user to grant admin access
+	// ID of existing user to grant admin access
+	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
+}
+
+type AdminsObservation struct {
+
+	// (List of String) Roles to assign (defaults to ORG_OWNER if empty)
+	// Roles to assign (defaults to ORG_OWNER if empty)
+	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
+
+	// (String) ID of existing user to grant admin access
+	// ID of existing user to grant admin access
+	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
+}
+
+type AdminsParameters struct {
+
+	// (List of String) Roles to assign (defaults to ORG_OWNER if empty)
+	// Roles to assign (defaults to ORG_OWNER if empty)
+	// +kubebuilder:validation:Optional
+	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
+
+	// (String) ID of existing user to grant admin access
+	// ID of existing user to grant admin access
+	// +kubebuilder:validation:Optional
+	UserID *string `json:"userId" tf:"user_id,omitempty"`
+}
+
 type OrgInitParameters struct {
+
+	// (Block Set) Admin users for the organization (see below for nested schema)
+	// Admin users for the organization
+	Admins []AdminsInitParameters `json:"admins,omitempty" tf:"admins,omitempty"`
 
 	// (Boolean) True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
 	// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
@@ -22,9 +61,17 @@ type OrgInitParameters struct {
 	// (String) Name of the org
 	// Name of the org
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (String) Optionally set a custom unique ID for the organization. If omitted, ZITADEL will generate one.
+	// Optionally set a custom unique ID for the organization. If omitted, ZITADEL will generate one.
+	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 }
 
 type OrgObservation struct {
+
+	// (Block Set) Admin users for the organization (see below for nested schema)
+	// Admin users for the organization
+	Admins []AdminsObservation `json:"admins,omitempty" tf:"admins,omitempty"`
 
 	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -37,6 +84,10 @@ type OrgObservation struct {
 	// Name of the org
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (String) Optionally set a custom unique ID for the organization. If omitted, ZITADEL will generate one.
+	// Optionally set a custom unique ID for the organization. If omitted, ZITADEL will generate one.
+	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
+
 	// (String) Primary domain of the org
 	// Primary domain of the org
 	PrimaryDomain *string `json:"primaryDomain,omitempty" tf:"primary_domain,omitempty"`
@@ -48,6 +99,11 @@ type OrgObservation struct {
 
 type OrgParameters struct {
 
+	// (Block Set) Admin users for the organization (see below for nested schema)
+	// Admin users for the organization
+	// +kubebuilder:validation:Optional
+	Admins []AdminsParameters `json:"admins,omitempty" tf:"admins,omitempty"`
+
 	// (Boolean) True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
 	// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
 	// +kubebuilder:validation:Optional
@@ -57,6 +113,11 @@ type OrgParameters struct {
 	// Name of the org
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (String) Optionally set a custom unique ID for the organization. If omitted, ZITADEL will generate one.
+	// Optionally set a custom unique ID for the organization. If omitted, ZITADEL will generate one.
+	// +kubebuilder:validation:Optional
+	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 }
 
 // OrgSpec defines the desired state of Org

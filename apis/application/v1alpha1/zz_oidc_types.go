@@ -13,6 +13,78 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ComplianceProblemsInitParameters struct {
+}
+
+type ComplianceProblemsObservation struct {
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+}
+
+type ComplianceProblemsParameters struct {
+}
+
+type LoginV2InitParameters struct {
+
+	// (String) Optionally specify a base uri of the login UI. If unspecified the default URI will be used.
+	// Optionally specify a base uri of the login UI. If unspecified the default URI will be used.
+	BaseURI *string `json:"baseUri,omitempty" tf:"base_uri,omitempty"`
+}
+
+type LoginV2Observation struct {
+
+	// (String) Optionally specify a base uri of the login UI. If unspecified the default URI will be used.
+	// Optionally specify a base uri of the login UI. If unspecified the default URI will be used.
+	BaseURI *string `json:"baseUri,omitempty" tf:"base_uri,omitempty"`
+}
+
+type LoginV2Parameters struct {
+
+	// (String) Optionally specify a base uri of the login UI. If unspecified the default URI will be used.
+	// Optionally specify a base uri of the login UI. If unspecified the default URI will be used.
+	// +kubebuilder:validation:Optional
+	BaseURI *string `json:"baseUri,omitempty" tf:"base_uri,omitempty"`
+}
+
+type LoginVersionInitParameters struct {
+
+	// (Boolean) Login V1
+	// Login V1
+	LoginV1 *bool `json:"loginV1,omitempty" tf:"login_v1,omitempty"`
+
+	// (Block List, Max: 1) Login V2 (see below for nested schema)
+	// Login V2
+	LoginV2 []LoginV2InitParameters `json:"loginV2,omitempty" tf:"login_v2,omitempty"`
+}
+
+type LoginVersionObservation struct {
+
+	// (Boolean) Login V1
+	// Login V1
+	LoginV1 *bool `json:"loginV1,omitempty" tf:"login_v1,omitempty"`
+
+	// (Block List, Max: 1) Login V2 (see below for nested schema)
+	// Login V2
+	LoginV2 []LoginV2Observation `json:"loginV2,omitempty" tf:"login_v2,omitempty"`
+}
+
+type LoginVersionParameters struct {
+
+	// (Boolean) Login V1
+	// Login V1
+	// +kubebuilder:validation:Optional
+	LoginV1 *bool `json:"loginV1,omitempty" tf:"login_v1,omitempty"`
+
+	// (Block List, Max: 1) Login V2 (see below for nested schema)
+	// Login V2
+	// +kubebuilder:validation:Optional
+	LoginV2 []LoginV2Parameters `json:"loginV2,omitempty" tf:"login_v2,omitempty"`
+}
+
 type OidcInitParameters struct {
 
 	// (Boolean) Access token role assertion
@@ -35,6 +107,10 @@ type OidcInitParameters struct {
 	// Auth method type, supported values: OIDC_AUTH_METHOD_TYPE_BASIC, OIDC_AUTH_METHOD_TYPE_POST, OIDC_AUTH_METHOD_TYPE_NONE, OIDC_AUTH_METHOD_TYPE_PRIVATE_KEY_JWT
 	AuthMethodType *string `json:"authMethodType,omitempty" tf:"auth_method_type,omitempty"`
 
+	// Channel Logout
+	// ZITADEL will use this URI to notify the application about terminated session according to the OIDC Back-Channel Logout
+	BackChannelLogoutURI *string `json:"backChannelLogoutUri,omitempty" tf:"back_channel_logout_uri,omitempty"`
+
 	// (String) Clockskew
 	// Clockskew
 	ClockSkew *string `json:"clockSkew,omitempty" tf:"clock_skew,omitempty"`
@@ -55,12 +131,16 @@ type OidcInitParameters struct {
 	// Token userinfo assertion
 	IDTokenUserinfoAssertion *bool `json:"idTokenUserinfoAssertion,omitempty" tf:"id_token_userinfo_assertion,omitempty"`
 
+	// (Block List, Max: 1) Specify the preferred login UI, where the user is redirected to for authentication. If unset, the login UI is chosen by the instance default. (see below for nested schema)
+	// Specify the preferred login UI, where the user is redirected to for authentication. If unset, the login UI is chosen by the instance default.
+	LoginVersion []LoginVersionInitParameters `json:"loginVersion,omitempty" tf:"login_version,omitempty"`
+
 	// (String) Name of the application
 	// Name of the application
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (String) ID of the organization
-	// ID of the organization
+	// (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+	// ID of the organization. If not provided, the organization of the authenticated user/service account is used.
 	// +crossplane:generate:reference:type=github.com/didactiklabs/provider-zitadel/apis/zitadel/v1alpha1.Org
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 
@@ -128,9 +208,17 @@ type OidcObservation struct {
 	// Auth method type, supported values: OIDC_AUTH_METHOD_TYPE_BASIC, OIDC_AUTH_METHOD_TYPE_POST, OIDC_AUTH_METHOD_TYPE_NONE, OIDC_AUTH_METHOD_TYPE_PRIVATE_KEY_JWT
 	AuthMethodType *string `json:"authMethodType,omitempty" tf:"auth_method_type,omitempty"`
 
+	// Channel Logout
+	// ZITADEL will use this URI to notify the application about terminated session according to the OIDC Back-Channel Logout
+	BackChannelLogoutURI *string `json:"backChannelLogoutUri,omitempty" tf:"back_channel_logout_uri,omitempty"`
+
 	// (String) Clockskew
 	// Clockskew
 	ClockSkew *string `json:"clockSkew,omitempty" tf:"clock_skew,omitempty"`
+
+	// compliancy (see below for nested schema)
+	// lists the problems for non-compliancy
+	ComplianceProblems []ComplianceProblemsObservation `json:"complianceProblems,omitempty" tf:"compliance_problems,omitempty"`
 
 	// (Boolean) Dev mode
 	// Dev mode
@@ -151,12 +239,20 @@ type OidcObservation struct {
 	// Token userinfo assertion
 	IDTokenUserinfoAssertion *bool `json:"idTokenUserinfoAssertion,omitempty" tf:"id_token_userinfo_assertion,omitempty"`
 
+	// (Block List, Max: 1) Specify the preferred login UI, where the user is redirected to for authentication. If unset, the login UI is chosen by the instance default. (see below for nested schema)
+	// Specify the preferred login UI, where the user is redirected to for authentication. If unset, the login UI is chosen by the instance default.
+	LoginVersion []LoginVersionObservation `json:"loginVersion,omitempty" tf:"login_version,omitempty"`
+
 	// (String) Name of the application
 	// Name of the application
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (String) ID of the organization
-	// ID of the organization
+	// (Boolean) specifies whether the config is OIDC compliant. A production configuration SHOULD be compliant
+	// specifies whether the config is OIDC compliant. A production configuration SHOULD be compliant
+	NoneCompliant *bool `json:"noneCompliant,omitempty" tf:"none_compliant,omitempty"`
+
+	// (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+	// ID of the organization. If not provided, the organization of the authenticated user/service account is used.
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 
 	// (List of String) Post logout redirect URIs
@@ -211,6 +307,11 @@ type OidcParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthMethodType *string `json:"authMethodType,omitempty" tf:"auth_method_type,omitempty"`
 
+	// Channel Logout
+	// ZITADEL will use this URI to notify the application about terminated session according to the OIDC Back-Channel Logout
+	// +kubebuilder:validation:Optional
+	BackChannelLogoutURI *string `json:"backChannelLogoutUri,omitempty" tf:"back_channel_logout_uri,omitempty"`
+
 	// (String) Clockskew
 	// Clockskew
 	// +kubebuilder:validation:Optional
@@ -236,13 +337,18 @@ type OidcParameters struct {
 	// +kubebuilder:validation:Optional
 	IDTokenUserinfoAssertion *bool `json:"idTokenUserinfoAssertion,omitempty" tf:"id_token_userinfo_assertion,omitempty"`
 
+	// (Block List, Max: 1) Specify the preferred login UI, where the user is redirected to for authentication. If unset, the login UI is chosen by the instance default. (see below for nested schema)
+	// Specify the preferred login UI, where the user is redirected to for authentication. If unset, the login UI is chosen by the instance default.
+	// +kubebuilder:validation:Optional
+	LoginVersion []LoginVersionParameters `json:"loginVersion,omitempty" tf:"login_version,omitempty"`
+
 	// (String) Name of the application
 	// Name of the application
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (String) ID of the organization
-	// ID of the organization
+	// (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+	// ID of the organization. If not provided, the organization of the authenticated user/service account is used.
 	// +crossplane:generate:reference:type=github.com/didactiklabs/provider-zitadel/apis/zitadel/v1alpha1.Org
 	// +kubebuilder:validation:Optional
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`

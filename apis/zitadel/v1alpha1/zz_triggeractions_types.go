@@ -24,8 +24,8 @@ type TriggerActionsInitParameters struct {
 	// Type of the flow to which the action triggers belong, supported values: FLOW_TYPE_EXTERNAL_AUTHENTICATION, FLOW_TYPE_CUSTOMISE_TOKEN, FLOW_TYPE_INTERNAL_AUTHENTICATION, FLOW_TYPE_SAML_RESPONSE
 	FlowType *string `json:"flowType,omitempty" tf:"flow_type,omitempty"`
 
-	// (String) ID of the organization
-	// ID of the organization
+	// (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+	// ID of the organization. If not provided, the organization of the authenticated user/service account is used.
 	// +crossplane:generate:reference:type=github.com/didactiklabs/provider-zitadel/apis/zitadel/v1alpha1.Org
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 
@@ -56,8 +56,8 @@ type TriggerActionsObservation struct {
 	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// (String) ID of the organization
-	// ID of the organization
+	// (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+	// ID of the organization. If not provided, the organization of the authenticated user/service account is used.
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 
 	// (String) Trigger type on when the actions get triggered, supported values: TRIGGER_TYPE_POST_AUTHENTICATION, TRIGGER_TYPE_PRE_CREATION, TRIGGER_TYPE_POST_CREATION, TRIGGER_TYPE_PRE_USERINFO_CREATION, TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION, TRIGGER_TYPE_PRE_SAML_RESPONSE_CREATION
@@ -78,8 +78,8 @@ type TriggerActionsParameters struct {
 	// +kubebuilder:validation:Optional
 	FlowType *string `json:"flowType,omitempty" tf:"flow_type,omitempty"`
 
-	// (String) ID of the organization
-	// ID of the organization
+	// (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+	// ID of the organization. If not provided, the organization of the authenticated user/service account is used.
 	// +crossplane:generate:reference:type=github.com/didactiklabs/provider-zitadel/apis/zitadel/v1alpha1.Org
 	// +kubebuilder:validation:Optional
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
