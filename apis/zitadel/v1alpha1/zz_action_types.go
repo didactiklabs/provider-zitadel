@@ -22,8 +22,8 @@ type ActionInitParameters struct {
 	// (String)
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (String) ID of the organization
-	// ID of the organization
+	// (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+	// ID of the organization. If not provided, the organization of the authenticated user/service account is used.
 	// +crossplane:generate:reference:type=github.com/didactiklabs/provider-zitadel/apis/zitadel/v1alpha1.Org
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 
@@ -55,8 +55,8 @@ type ActionObservation struct {
 	// (String)
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (String) ID of the organization
-	// ID of the organization
+	// (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+	// ID of the organization. If not provided, the organization of the authenticated user/service account is used.
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 
 	// (String)
@@ -82,8 +82,8 @@ type ActionParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (String) ID of the organization
-	// ID of the organization
+	// (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+	// ID of the organization. If not provided, the organization of the authenticated user/service account is used.
 	// +crossplane:generate:reference:type=github.com/didactiklabs/provider-zitadel/apis/zitadel/v1alpha1.Org
 	// +kubebuilder:validation:Optional
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`

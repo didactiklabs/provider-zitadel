@@ -12,10 +12,10 @@ TERRAFORM_VERSION_VALID := $(shell [ "$(TERRAFORM_VERSION)" = "`printf "$(TERRAF
 
 export TERRAFORM_PROVIDER_SOURCE ?= zitadel/zitadel
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/zitadel/terraform-provider-zitadel
-export TERRAFORM_PROVIDER_VERSION ?= 2.0.2
+export TERRAFORM_PROVIDER_VERSION ?= 2.12.5
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME ?= terraform-provider-zitadel
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://github.com/zitadel/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/releases/download/v$(TERRAFORM_PROVIDER_VERSION)
-export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-zitadel_2.0.2
+export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-zitadel_2.12.5
 export TERRAFORM_DOCS_PATH ?= docs/resources
 
 

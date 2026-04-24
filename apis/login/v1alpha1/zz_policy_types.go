@@ -74,8 +74,8 @@ type PolicyInitParameters struct {
 	// +listType=set
 	MultiFactors []*string `json:"multiFactors,omitempty" tf:"multi_factors,omitempty"`
 
-	// (String) ID of the organization
-	// ID of the organization
+	// (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+	// ID of the organization. If not provided, the organization of the authenticated user/service account is used.
 	// +crossplane:generate:reference:type=github.com/didactiklabs/provider-zitadel/apis/zitadel/v1alpha1.Org
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 
@@ -171,8 +171,8 @@ type PolicyObservation struct {
 	// +listType=set
 	MultiFactors []*string `json:"multiFactors,omitempty" tf:"multi_factors,omitempty"`
 
-	// (String) ID of the organization
-	// ID of the organization
+	// (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+	// ID of the organization. If not provided, the organization of the authenticated user/service account is used.
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 
 	// (String)
@@ -271,8 +271,8 @@ type PolicyParameters struct {
 	// +listType=set
 	MultiFactors []*string `json:"multiFactors,omitempty" tf:"multi_factors,omitempty"`
 
-	// (String) ID of the organization
-	// ID of the organization
+	// (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+	// ID of the organization. If not provided, the organization of the authenticated user/service account is used.
 	// +crossplane:generate:reference:type=github.com/didactiklabs/provider-zitadel/apis/zitadel/v1alpha1.Org
 	// +kubebuilder:validation:Optional
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
