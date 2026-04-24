@@ -83,8 +83,8 @@ spec:
                     type: string
                   orgId:
                     description: |-
-                      (String) ID of the organization
-                      ID of the organization
+                      (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+                      ID of the organization. If not provided, the organization of the authenticated user/service account is used.
                     type: string
                   orgIdRef:
                     description: Reference to a Org in zitadel to populate orgId.
@@ -192,8 +192,8 @@ spec:
                     type: string
                   orgId:
                     description: |-
-                      (String) ID of the organization
-                      ID of the organization
+                      (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+                      ID of the organization. If not provided, the organization of the authenticated user/service account is used.
                     type: string
                   orgIdRef:
                     description: Reference to a Org in zitadel to populate orgId.
@@ -480,8 +480,8 @@ spec:
                     type: string
                   orgId:
                     description: |-
-                      (String) ID of the organization
-                      ID of the organization
+                      (String) ID of the organization. If not provided, the organization of the authenticated user/service account is used.
+                      ID of the organization. If not provided, the organization of the authenticated user/service account is used.
                     type: string
                   script:
                     description: (String)

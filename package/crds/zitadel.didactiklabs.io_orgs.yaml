@@ -75,6 +75,26 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  admins:
+                    description: |-
+                      (Block Set) Admin users for the organization (see below for nested schema)
+                      Admin users for the organization
+                    items:
+                      properties:
+                        roles:
+                          description: |-
+                            (List of String) Roles to assign (defaults to ORG_OWNER if empty)
+                            Roles to assign (defaults to ORG_OWNER if empty)
+                          items:
+                            type: string
+                          type: array
+                        userId:
+                          description: |-
+                            (String) ID of existing user to grant admin access
+                            ID of existing user to grant admin access
+                          type: string
+                      type: object
+                    type: array
                   isDefault:
                     description: |-
                       (Boolean) True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
@@ -84,6 +104,11 @@ spec:
                     description: |-
                       (String) Name of the org
                       Name of the org
+                    type: string
+                  orgId:
+                    description: |-
+                      (String) Optionally set a custom unique ID for the organization. If omitted, ZITADEL will generate one.
+                      Optionally set a custom unique ID for the organization. If omitted, ZITADEL will generate one.
                     type: string
                 type: object
               initProvider:
@@ -99,6 +124,26 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  admins:
+                    description: |-
+                      (Block Set) Admin users for the organization (see below for nested schema)
+                      Admin users for the organization
+                    items:
+                      properties:
+                        roles:
+                          description: |-
+                            (List of String) Roles to assign (defaults to ORG_OWNER if empty)
+                            Roles to assign (defaults to ORG_OWNER if empty)
+                          items:
+                            type: string
+                          type: array
+                        userId:
+                          description: |-
+                            (String) ID of existing user to grant admin access
+                            ID of existing user to grant admin access
+                          type: string
+                      type: object
+                    type: array
                   isDefault:
                     description: |-
                       (Boolean) True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
@@ -108,6 +153,11 @@ spec:
                     description: |-
                       (String) Name of the org
                       Name of the org
+                    type: string
+                  orgId:
+                    description: |-
+                      (String) Optionally set a custom unique ID for the organization. If omitted, ZITADEL will generate one.
+                      Optionally set a custom unique ID for the organization. If omitted, ZITADEL will generate one.
                     type: string
                 type: object
               managementPolicies:
@@ -287,6 +337,26 @@ spec:
             properties:
               atProvider:
                 properties:
+                  admins:
+                    description: |-
+                      (Block Set) Admin users for the organization (see below for nested schema)
+                      Admin users for the organization
+                    items:
+                      properties:
+                        roles:
+                          description: |-
+                            (List of String) Roles to assign (defaults to ORG_OWNER if empty)
+                            Roles to assign (defaults to ORG_OWNER if empty)
+                          items:
+                            type: string
+                          type: array
+                        userId:
+                          description: |-
+                            (String) ID of existing user to grant admin access
+                            ID of existing user to grant admin access
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: (String) The ID of this resource.
                     type: string
@@ -299,6 +369,11 @@ spec:
                     description: |-
                       (String) Name of the org
                       Name of the org
+                    type: string
+                  orgId:
+                    description: |-
+                      (String) Optionally set a custom unique ID for the organization. If omitted, ZITADEL will generate one.
+                      Optionally set a custom unique ID for the organization. If omitted, ZITADEL will generate one.
                     type: string
                   primaryDomain:
                     description: |-
